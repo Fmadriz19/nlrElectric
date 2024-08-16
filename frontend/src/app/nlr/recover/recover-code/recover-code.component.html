@@ -1,0 +1,24 @@
+<div class=""></div>
+<div class="bg-red-200 relative min-h-screen sm:flex sm:flex-row justify-center bg-transparent">
+    <div class="justify-center self-center z-10 mt-0 shadow-lg">
+        <div class="p-10 bg-white mx-auto rounded-3xl w-96">
+            <h1 class="text-gray-800 font-semibold text-2xl">Código de Verificación</h1>
+            <p class="text-gray-400 text-sm mt-2">
+                Por favor ingrese el código enviado a su teléfono.
+            </p>
+                
+            <div class="mt-4">
+                <div class="flex justify-center items-center relative">
+                    <p-inputOtp [length]="6" [(ngModel)]="value" />
+                </div>
+                <p *ngIf="errorCode" class="text-sm ms-1 text-red-500 py-2">{{this.errorCode}}</p>
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="w-full flex justify-center dark:bg-purple-800 dark:hover:bg-purple-700 text-gray-100 p-3 rounded-lg tracking-wide font-semibold cursor-pointer transition ease-in duration-500 bg-sky-600 hover:bg-sky-700"
+                (click)="enviarCorreo()">Verificar Código</button>
+            </div>
+        </div>
+        
+    </div>
+</div>
