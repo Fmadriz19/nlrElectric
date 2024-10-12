@@ -34,7 +34,7 @@
               <a href="#" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Dashboard</a>
               <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a>
               <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Projects</a>
-              <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Calendar</a>
+              <a *ngIf="permisos" href="list" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Listado</a>
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@
 
           <p-tieredMenu #menu [model]="items" [popup]="true" /> -->
 
-          <button type="button" (click)="modeDark()" class="relative mr-2 rounded-full bg-sky-600 p-1 text-gray-200 hover:text-white hover:border-gray-200 hover:bg-gray-900 transition duration-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 dark:bg-gray-900
+          <button type="button" (click)="modeDark()" class="relative mr-2 rounded-full bg-sky-600 p-1 text-gray-200 hover:text-white hover:border-gray-200 hover:bg-gray-900 transition ease-in duration-500 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 dark:bg-gray-900
           dark:hover:bg-sky-600 dark:text-yellow-300 dark:hover:text-yellow-400">
 
               <!-- modo claro -->
@@ -70,32 +70,38 @@
           </button>
   
           <!-- Profile dropdown -->
-          <div class="relative ml-3">
+          <div *ngIf="sessionAct" class="relative ml-3">
             <div>
-              <button type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+              <button (click)="visibleMenuAvatar()" type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                 <span class="absolute -inset-1.5"></span>
                 <span class="sr-only">Open user menu</span>
-                <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                
+              <div class="relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                <span class="font-medium text-gray-600 dark:text-gray-300">{{personal_perfil}}</span>
+              </div>
+
               </button>
             </div>
   
-            <!--
-              Dropdown menu, show/hide based on menu state.
-  
-              Entering: "transition ease-out duration-100"
-                From: "transform opacity-0 scale-95"
-                To: "transform opacity-100 scale-100"
-              Leaving: "transition ease-in duration-75"
-                From: "transform opacity-100 scale-100"
-                To: "transform opacity-0 scale-95"
-            -->
-<!--             <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
- -->              <!-- Active: "bg-gray-100", Not Active: "" -->
-              <!-- <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
-            </div> -->
+            <div *ngIf="avatarMenu" class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+              <!-- Active: "bg-gray-100", Not Active: "" -->
+              <a (click)="visibleMenuAvatar()" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+              <a (click)="visibleMenuAvatar()" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+              <a (click)="cerrarSession()" class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:text-slate-200 hover:bg-sky-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+            </div>
           </div>
+
+          <div *ngIf="!sessionAct" class="relative ml-3">
+            <div class="flex divide-x divide-solid">
+              <div class="">
+                <a href="login" class="mr-2 cursor-pointer text-gray-100 hover:text-white rounded-lg p-2 text-sm hover:bg-gray-900 dark:bg-gray-900 transition ease-in duration-500">Iniciar sesión</a>
+              </div>
+              <div class="">
+                <a href="registre" class="ml-2 cursor-pointer text-gray-100 hover:text-white rounded-lg p-2 text-sm hover:bg-gray-900 dark:bg-gray-900 transition ease-in duration-500">Registrarse</a>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -108,7 +114,7 @@
         <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Dashboard</a>
         <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a>
         <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Projects</a>
-        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Calendar</a>
+        <a *ngIf="permisos" href="list" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Listado</a>
       </div>
     </div>
   </nav>

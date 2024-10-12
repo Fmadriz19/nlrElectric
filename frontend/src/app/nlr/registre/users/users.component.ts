@@ -1,9 +1,9 @@
 import { NgClass, NgIf } from '@angular/common';
 import { Component, ElementRef } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { NlrservicesService } from '../../../services/nlrservices.service';
 import { Userregistro } from '../../interfaces/registros';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -32,11 +32,12 @@ export class UsersComponent {
     user: '',
   };
 
+  statusBtn: string = 'Registrarse'
   passwordPassSVG: boolean = true;
   confirPasswordSVG: boolean = true;
   confirPassword: boolean = false;
   passwordPass: boolean = false;
-  loading: boolean = false;
+  loading: boolean = true;
 
   constructor(private elementeRef: ElementRef, private services:NlrservicesService, private router: Router){
     

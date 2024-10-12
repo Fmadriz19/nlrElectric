@@ -31,14 +31,47 @@ export interface resetPassword{
 }
 
 export interface searchUser{
-    id: string | null;
+    id: string;
 }
 
+export interface passwordReset{
+    email: string;
+    password: string;
+    password_confirmation: string;
+}
+
+export interface cookielogin {
+    token: string;
+    id: string;
+    rol: string;
+}
 export interface Products{
+    name: string;
+    estado: string;
+    price: number;
+    stock: number;
+    img: string;
+    descripcion: string;
+    marca: string;
+    proveedor: string;
+    tipo: string;
+    model: string;
+    amperaje: string;
+    voltaje: string;
+}
+export interface ProductsGeneral{
     id: number;
     name: string;
-    category: string;
-    price: Float32Array;
+    estado: string;
+    price: number;
     stock: number;
-    state: string;
+    img: string;
+    descripcion: string;
+    marca: string;
+    proveedor: string;
+    tipo: string;
+    model: string;
+    amperaje: string;
+    voltaje: string;
+    showFullDescription: boolean;
 }

@@ -18,9 +18,8 @@ class UserController extends Controller
     /*      Mostrar Tabla     */
     public function index()
     {
-        return response()->json([
-            'message' => 'ya basta'
-        ]);
+        $usuario = User::all();
+        return response()->json($usuario);
     }
 
     /*           */
@@ -32,10 +31,12 @@ class UserController extends Controller
     /*      Crear usuario para tabla     */
     public function store(Request $request)
     {
+        
         // Validaciones de los campos
         $request->validate([
             'name' => 'required',
-            'user' => 'required',
+            'rol' => 'required',
+            'user' => 'required|unique:users',
             'email' => 'required|email|unique:users',
             'password' => ['required','confirmed', Password::min(8)],
         ]);
@@ -78,7 +79,7 @@ class UserController extends Controller
             $id = $usuario -> id;
             $rol = $usuario -> rol;
             return response()->json([
-                'Token' => $token,
+                'token' => $token,
                 'id' => $id,
                 'rol' => $rol
             ]);
@@ -86,14 +87,12 @@ class UserController extends Controller
         }
         else{
             return response()->json([
-                'message' => 'error'
-            ]);
+                'message' => 'La contraseña es incorrecta. Vuelve a intentarlo o haz clic en "¿Olvidaste la contraseña?" para restablecerla.'
+            ], 401);
             /* return back()->withErrors([
                 'email' => 'The provided credentials do not match our records.',
             ])->onlyInput('email'); */
         }
- 
-        
     }
 
     /*     Actualizar datos de un usuario en especifico      */
@@ -105,7 +104,12 @@ class UserController extends Controller
     /*     Eliminar un usuario      */
     public function destroy(string $id)
     {
-        //
+        // eliminar usuario
+        $usuario = User::find($id); 
+        $usuario->delete();
+        return response()->json([
+            'message' => 'Usuario eliminado con exito'
+        ]);
     }
 
     /*     Enviar Correo      */
@@ -142,5 +146,37 @@ class UserController extends Controller
     {
         // Generar un número aleatorio de la longitud especificada
         return str_pad(rand(0, 999999), $longitud, '0', STR_PAD_LEFT);
+    }
+
+    public function restorePassword(Request $request)
+    {
+        $request->validate([
+            'password' => ['required','confirmed', Password::min(8)],
+        ]);
+        
+        $usuario = User::where('email','=', $request->email)->first();
+        if ($usuario) {
+           
+            //Alta del usuario
+            $usuario->password = Hash::make($request->password);
+            $usuario->code_segurity = null;
+            $usuario->save();
+            
+            // Respuesta
+            return response()->json([
+                'message' => 'resgistro exitoso'
+            ]);
+        } else {
+            return response()->json(['message'=> 'El correo no existe'], 404);
+        }
+    }
+
+    // Cerrar sesion
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            'message' => 'Sesion terminada'
+        ]);
     }
 }
