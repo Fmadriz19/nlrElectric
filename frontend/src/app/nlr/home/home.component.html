@@ -1,15 +1,772 @@
-
-
-<div class="shrink-0">
-    <span class="mt-20 ms-20 before:rounded-full before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-pink-500 relative inline-block">
-        <span class="relative text-white p-2 w-1">Z</span>
-      </span>
-</div>
-<div class="ms-20 flex relative">
-    <img src="../../../assets/nlr/avatars/planet.jpg" class="h-8 w-8 rounded-full relative" alt="">
-    <span class="relative flex h-3 w-3 right-2">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-    </span>
-</div>
-
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="shortcut icon" href="./assets/img/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="./assets/img/apple-icon.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css"
+    />
+    <title>NRL electric C.A</title>
+  </head>
+  <body class="text-gray-800 antialiased">
+    <!-- <nav
+      class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 "
+    >
+      <div
+        class="container px-4 mx-auto flex flex-wrap items-center justify-between"
+      >
+        <div
+          class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
+        >
+          <a
+            class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
+            href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/presentation"
+            >Inicio</a
+          ><button
+            class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+            type="button"
+            onclick="toggleNavbar('example-collapse-navbar')"
+          >
+            <i class="text-white fas fa-bars"></i>
+          </button>
+        </div>
+        <div
+          class="lg:flex flex-grow items-center bg-white lg:bg-transparent lg:shadow-none hidden"
+          id="example-collapse-navbar"
+        >
+          
+          <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
+            <li class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold cursor-pointer">
+              productos
+            </li>
+            <li class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold cursor-pointer">
+              provedores
+            </li>
+            <li class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold cursor-pointer">
+              Ingresar
+            </li>
+            <li class="flex items-center">
+              <button
+                class="bg-white text-gray-800 active:bg-gray-100 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3"
+                type="button"
+                style="transition: all 0.15s ease 0s;"
+              >
+                <i class="fas fa-arrow-alt-circle-down"></i> Registrarse
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav> -->
+    <main>
+      <div
+        class="relative pt-16 pb-32 flex content-center items-center justify-center"
+        style="min-height: 75vh;"
+      >
+        <div
+          class="absolute top-0 w-full h-full bg-center bg-cover"
+          style='background-image: url("https://cuervaenergia.com/static/ed402570faa685476e42b6ae0b7a6c87/c0a1e/mantenimiento-electrico-industrial.webp");'
+        
+        >
+          <span
+            id="blackOverlay"
+            class="w-full h-full absolute opacity-75 bg-black"
+          ></span>
+        </div>
+        <div class="container relative mx-auto">
+          <div class="items-center flex flex-wrap">
+            <div class="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
+              <div class="pr-12">
+                <h1 class="text-white font-semibold text-5xl">
+                  Bienvenido a NRL electric C.A
+                </h1>
+                <p class="mt-4 text-lg text-gray-300">
+                  Los mejores en mantenimientos, Servicios, expertos en reparacion
+                  <br />para todos nuestros clientes.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden"
+          style="height: 70px;"
+        >
+          <svg
+            class="absolute bottom-0 overflow-hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            version="1.1"
+            viewBox="0 0 2560 100"
+            x="0"
+            y="0"
+          >
+            <polygon
+              class="text-gray-300 fill-current"
+              points="2560 0 2560 100 0 100"
+            ></polygon>
+          </svg>
+        </div>
+      </div>
+      <section class="pb-20 bg-gray-300 -mt-24">
+        <div class="container mx-auto px-4">
+          <div class="flex flex-wrap">
+            <div class="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
+              <div
+                class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg"
+              >
+                <div class="px-4 py-5 flex-auto">
+                  <div
+                    class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400"
+                  >
+                    <i class="fas fa-briefcase"></i>
+                  </div>
+                  <h6 class="text-xl font-semibold">Mantenimientos</h6>
+                  <p class="mt-2 mb-4 text-gray-600">
+                    Mantenimientos para maquinas y equipos electronicos.
+                    <br>Asi como pruebas y instalaciones electricas.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="w-full md:w-4/12 px-4 text-center">
+              <div
+                class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg"
+              >
+                <div class="px-4 py-5 flex-auto">
+                  <div
+                    class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-blue-400"
+                  >
+                    <i class="fas fa-wrench"></i>
+                  </div>
+                  <h6 class="text-xl font-semibold">Reparaciones</h6>
+                  <p class="mt-2 mb-4 text-gray-600">
+                    Sustitucion de piezas y reparacion garantizada para maquinas
+                    <br> y equipos electronicos.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="pt-6 w-full md:w-4/12 px-4 text-center">
+              <div
+                class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg"
+              >
+                <div class="px-4 py-5 flex-auto">
+                  <div
+                    class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-green-400"
+                  >
+                    <i class="fas fa-award"></i>
+                  </div>
+                  <h6 class="text-xl font-semibold">Mejoras</h6>
+                  <p class="mt-2 mb-4 text-gray-600">
+                    Incorporacion de mejoras para las maquinas electronicas
+                    <br> y equipos.  
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center mt-32">
+            <div class="w-full md:w-5/12 px-4 mr-auto ml-auto">
+              <div
+                class="text-white p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-blue-700"
+              >
+                <i class="fas fa-user-friends text-xl"></i>
+              </div>
+              <h3 class="text-3xl mb-2 font-semibold leading-normal">
+                Nuestros trabajadores
+              </h3>
+              <p
+                class="text-lg font-light leading-relaxed mt-4 mb-4 text-gray-700"
+              >
+              En NRL Electric, contamos con un equipo de técnicos altamente capacitados y con amplia experiencia en mantenimiento, reparación y servicios eléctricos. Nos enorgullece ofrecer soluciones confiables y eficientes, siempre con el objetivo de superar las expectativas de nuestros clientes.
+              </p>
+              <p
+                class="text-lg font-light leading-relaxed mt-0 mb-4 text-gray-700"
+              >
+              Cada miembro cuenta con amplia experiencia en mantenimiento preventivo, resolución de fallas eléctricas y atención a proyectos de diversa envergadura, asegurando un servicio confiable y eficiente para cada cliente.
+              </p>
+              <a
+                href="https://www.instagram.com/invnlrelectricca/?hl=es"
+                class="font-bold text-gray-800 mt-8"
+                >Check Tailwind Starter Kit!</a
+              >
+            </div>
+            <div class="w-full md:w-4/12 px-4 mr-auto ml-auto">
+              <div
+                class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blue-800"
+              >
+                <img
+                  alt="..."
+                  src="data:image/jpeg;base64,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"
+                  class="w-full align-middle rounded-t-lg"
+                />
+                <blockquote class="relative p-8 mb-4">
+                  <svg
+                    preserveAspectRatio="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 583 95"
+                    class="absolute left-0 w-full block"
+                    style="height: 95px; top: -94px;"
+                  >
+                    <polygon
+                      points="-30,95 583,95 583,65"
+                      class="text-blue-800 fill-current"
+                    ></polygon>
+                  </svg>
+                  <h4 class="text-xl font-bold text-white">
+                    Seguridad garantizada
+                  </h4>
+                  <p class="text-md font-light mt-2 text-white">
+                    Nuestros técnicos te brindan la seguridad y confianza que necesitas para tus proyectos eléctricos. Desde la instalación hasta el mantenimiento, trabajamos con profesionalismo y eficiencia para asegurar tu tranquilidad.
+                  </p>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="relative py-20">
+        <div
+          class="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
+          style="height: 80px;"
+        >
+          <svg
+            class="absolute bottom-0 overflow-hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            version="1.1"
+            viewBox="0 0 2560 100"
+            x="0"
+            y="0"
+          >
+            <polygon
+              class="text-white fill-current"
+              points="2560 0 2560 100 0 100"
+            ></polygon>
+          </svg>
+        </div>
+        <div class="container mx-auto px-4">
+          <div class="items-center flex flex-wrap">
+            <div class="w-full md:w-4/12 ml-auto mr-auto px-4">
+              <img
+                alt="..."
+                class="max-w-full rounded-lg shadow-lg"
+                src="https://img.freepik.com/fotos-premium/gerente-inventario-femenina-usando-tableta-hablando-trabajador-dos-paquetes-carton_1313853-101302.jpg?semt=ais_hybrid"
+              />
+            </div>
+            <div class="w-full md:w-5/12 ml-auto mr-auto px-4">
+              <div class="md:pr-12">
+                <div
+                  class="text-white p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-blue-600"
+                >
+                  <i class="fas fa-globe text-xl"></i>
+                </div>
+                <h3 class="text-3xl font-semibold">Seleccion de provedores</h3>
+                <p class="mt-4 text-lg leading-relaxed text-gray-600">
+                  En NRL Electric, la calidad es nuestra prioridad. Por eso, colaboramos estrechamente con proveedores líderes en el sector, garantizando así materiales y equipos de primer nivel para cada proyecto 
+                  <br> <br> Nuestra red de proveedores, con quienes compartimos el compromiso por la excelencia, nos permite ofrecerte soluciones confiables y duraderas, satisfaciendo las necesidades específicas de cada cliente. 
+                </p>
+                <ul class="list-none mt-6">
+                  <li class="py-2">
+                    <div class="flex items-center">
+                      <div>
+                        <span
+                          class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-white bg-blue-800 mr-3"
+                          ><i class="fas fa-certificate"></i
+                        ></span>
+                      </div>
+                      <div>
+                        <h4 class="text-gray-600">
+                          Enfoque en la calidad
+                        </h4>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="py-2">
+                    <div class="flex items-center">
+                      <div>
+                        <span
+                          class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-white bg-blue-800 mr-3"
+                          ><i class="fas fa-user"></i
+                        ></span>
+                      </div>
+                      <div>
+                        <h4 class="text-gray-600">Beneficios para el cliente</h4>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="py-2">
+                    <div class="flex items-center">
+                      <div>
+                        <span
+                          class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-white bg-blue-800 mr-3"
+                          ><i class="far fa-paper-plane"></i
+                        ></span>
+                      </div>
+                      <div>
+                        <h4 class="text-gray-600">Seleccion cuidadosa</h4>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="pt-20 pb-48">
+        <div class="container mx-auto px-4">
+          <div class="flex flex-wrap justify-center text-center mb-24">
+            <div class="w-full lg:w-6/12 px-4">
+              <h2 class="text-4xl font-semibold">Here are our heroes</h2>
+              <p class="text-lg leading-relaxed m-4 text-gray-600">
+                According to the National Oceanic and Atmospheric
+                Administration, Ted, Scambos, NSIDClead scentist, puts the
+                potentially record maximum.
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-wrap">
+            <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+              <div class="px-6">
+                <img
+                  alt="..."
+                  src="./assets/img/team-1-800x800.jpg"
+                  class="shadow-lg rounded-full max-w-full mx-auto"
+                  style="max-width: 120px;"
+                />
+                <div class="pt-6 text-center">
+                  <h5 class="text-xl font-bold">Ryan Tompson</h5>
+                  <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
+                    Web Developer
+                  </p>
+                  <div class="mt-6">
+                    <button
+                      class="bg-blue-400 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                      type="button"
+                    >
+                      <i class="fab fa-twitter"></i></button
+                    ><button
+                      class="bg-blue-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                      type="button"
+                    >
+                      <i class="fab fa-facebook-f"></i></button
+                    ><button
+                      class="bg-pink-500 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                      type="button"
+                    >
+                      <i class="fab fa-dribbble"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+              <div class="px-6">
+                <img
+                  alt="..."
+                  src="./assets/img/team-2-800x800.jpg"
+                  class="shadow-lg rounded-full max-w-full mx-auto"
+                  style="max-width: 120px;"
+                />
+                <div class="pt-6 text-center">
+                  <h5 class="text-xl font-bold">Romina Hadid</h5>
+                  <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
+                    Marketing Specialist
+                  </p>
+                  <div class="mt-6">
+                    <button
+                      class="bg-red-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                      type="button"
+                    >
+                      <i class="fab fa-google"></i></button
+                    ><button
+                      class="bg-blue-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                      type="button"
+                    >
+                      <i class="fab fa-facebook-f"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+              <div class="px-6">
+                <img
+                  alt="..."
+                  src="./assets/img/team-3-800x800.jpg"
+                  class="shadow-lg rounded-full max-w-full mx-auto"
+                  style="max-width: 120px;"
+                />
+                <div class="pt-6 text-center">
+                  <h5 class="text-xl font-bold">Alexa Smith</h5>
+                  <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
+                    UI/UX Designer
+                  </p>
+                  <div class="mt-6">
+                    <button
+                      class="bg-red-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                      type="button"
+                    >
+                      <i class="fab fa-google"></i></button
+                    ><button
+                      class="bg-blue-400 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                      type="button"
+                    >
+                      <i class="fab fa-twitter"></i></button
+                    ><button
+                      class="bg-gray-800 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                      type="button"
+                    >
+                      <i class="fab fa-instagram"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+              <div class="px-6">
+                <img
+                  alt="..."
+                  src="./assets/img/team-4-470x470.png"
+                  class="shadow-lg rounded-full max-w-full mx-auto"
+                  style="max-width: 120px;"
+                />
+                <div class="pt-6 text-center">
+                  <h5 class="text-xl font-bold">Jenna Kardi</h5>
+                  <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
+                    Founder and CEO
+                  </p>
+                  <div class="mt-6">
+                    <button
+                      class="bg-pink-500 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                      type="button"
+                    >
+                      <i class="fab fa-dribbble"></i></button
+                    ><button
+                      class="bg-red-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                      type="button"
+                    >
+                      <i class="fab fa-google"></i></button
+                    ><button
+                      class="bg-blue-400 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                      type="button"
+                    >
+                      <i class="fab fa-twitter"></i></button
+                    ><button
+                      class="bg-gray-800 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                      type="button"
+                    >
+                      <i class="fab fa-instagram"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="pb-20 relative block bg-gray-900">
+        <div
+          class="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
+          style="height: 80px;"
+        >
+          <svg
+            class="absolute bottom-0 overflow-hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            version="1.1"
+            viewBox="0 0 2560 100"
+            x="0"
+            y="0"
+          >
+            <polygon
+              class="text-gray-900 fill-current"
+              points="2560 0 2560 100 0 100"
+            ></polygon>
+          </svg>
+        </div>
+        <div class="container mx-auto px-4 lg:pt-24 lg:pb-64">
+          <div class="flex flex-wrap text-center justify-center">
+            <div class="w-full lg:w-6/12 px-4">
+              <h2 class="text-4xl font-semibold text-white">Build something</h2>
+              <p class="text-lg leading-relaxed mt-4 mb-4 text-gray-500">
+                Put the potentially record low maximum sea ice extent tihs year
+                down to low ice. According to the National Oceanic and
+                Atmospheric Administration, Ted, Scambos.
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-wrap mt-12 justify-center">
+            <div class="w-full lg:w-3/12 px-4 text-center">
+              <div
+                class="text-gray-900 p-3 w-12 h-12 shadow-lg rounded-full bg-white inline-flex items-center justify-center"
+              >
+                <i class="fas fa-medal text-xl"></i>
+              </div>
+              <h6 class="text-xl mt-5 font-semibold text-white">
+                Excelent Services
+              </h6>
+              <p class="mt-2 mb-4 text-gray-500">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+            </div>
+            <div class="w-full lg:w-3/12 px-4 text-center">
+              <div
+                class="text-gray-900 p-3 w-12 h-12 shadow-lg rounded-full bg-white inline-flex items-center justify-center"
+              >
+                <i class="fas fa-poll text-xl"></i>
+              </div>
+              <h5 class="text-xl mt-5 font-semibold text-white">
+                Grow your market
+              </h5>
+              <p class="mt-2 mb-4 text-gray-500">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+            </div>
+            <div class="w-full lg:w-3/12 px-4 text-center">
+              <div
+                class="text-gray-900 p-3 w-12 h-12 shadow-lg rounded-full bg-white inline-flex items-center justify-center"
+              >
+                <i class="fas fa-lightbulb text-xl"></i>
+              </div>
+              <h5 class="text-xl mt-5 font-semibold text-white">Launch time</h5>
+              <p class="mt-2 mb-4 text-gray-500">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="relative block py-24 lg:pt-0 bg-gray-900">
+        <div class="container mx-auto px-4">
+          <div class="flex flex-wrap justify-center lg:-mt-64 -mt-48">
+            <div class="w-full lg:w-6/12 px-4">
+              <div
+                class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300"
+              >
+                <div class="flex-auto p-5 lg:p-10">
+                  <h4 class="text-2xl font-semibold">Want to work with us?</h4>
+                  <p class="leading-relaxed mt-1 mb-4 text-gray-600">
+                    Complete this form and we will get back to you in 24 hours.
+                  </p>
+                  <div class="relative w-full mb-3 mt-8">
+                    <label
+                      class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                      for="full-name"
+                      >Full Name</label
+                    ><input
+                      type="text"
+                      class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                      placeholder="Full Name"
+                      style="transition: all 0.15s ease 0s;"
+                    />
+                  </div>
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                      for="email"
+                      >Email</label
+                    ><input
+                      type="email"
+                      class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                      placeholder="Email"
+                      style="transition: all 0.15s ease 0s;"
+                    />
+                  </div>
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                      for="message"
+                      >Message</label
+                    ><textarea
+                      rows="4"
+                      cols="80"
+                      class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                      placeholder="Type a message..."
+                    ></textarea>
+                  </div>
+                  <div class="text-center mt-6">
+                    <button
+                      class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                      type="button"
+                      style="transition: all 0.15s ease 0s;"
+                    >
+                      Send Message
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="relative bg-gray-300 pt-8 pb-6">
+      <div
+        class="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
+        style="height: 80px;"
+      >
+        <svg
+          class="absolute bottom-0 overflow-hidden"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+          version="1.1"
+          viewBox="0 0 2560 100"
+          x="0"
+          y="0"
+        >
+          <polygon
+            class="text-gray-300 fill-current"
+            points="2560 0 2560 100 0 100"
+          ></polygon>
+        </svg>
+      </div>
+      <div class="container mx-auto px-4">
+        <div class="flex flex-wrap">
+          <div class="w-full lg:w-6/12 px-4">
+            <h4 class="text-3xl font-semibold">Mantengamonos en contacto!</h4>
+            <h5 class="text-lg mt-0 mb-2 text-gray-700">
+              Encuentranos en algunas de nuestras redes sosiales, como los son:
+            </h5>
+            <div class="mt-6">
+              <button
+                class="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
+                type="button"
+              >
+                <i class="flex fab fa-twitter"></i></button
+              ><button
+                class="bg-white text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
+                type="button"
+              >
+                <i class="flex fab fa-facebook-square"></i></button
+              ><button
+                class="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
+                type="button"
+              >
+                <i class="flex fab fa-dribbble"></i></button
+              ><button
+                class="bg-white text-gray-900 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
+                type="button"
+              >
+                <i class="flex fab fa-github"></i>
+              </button>
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="flex flex-wrap items-top mb-6">
+              <div class="w-full lg:w-4/12 px-4 ml-auto">
+                <span
+                  class="block uppercase text-gray-600 text-sm font-semibold mb-2"
+                  >Useful Links</span
+                >
+                <ul class="list-unstyled">
+                  <li>
+                    <a
+                      class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
+                      
+                      >About Us</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
+                      
+                      >Blog</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
+                      
+                      >Github</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
+                      
+                      >Free Products</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <span
+                  class="block uppercase text-gray-600 text-sm font-semibold mb-2"
+                  >Other Resources</span
+                >
+                <ul class="list-unstyled">
+                  <li>
+                    <a
+                      class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
+                      
+                      >MIT License</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
+                      
+                      >Terms &amp; Conditions</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
+                    
+                      >Privacy Policy</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
+                      
+                      >Contact Us</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="my-6 border-gray-400" />
+        <div
+          class="flex flex-wrap items-center md:justify-between justify-center"
+        >
+          <div class="w-full md:w-4/12 px-4 mx-auto text-center">
+            <div class="text-sm text-gray-600 font-semibold py-1">
+              Empresas NRL electrc C.A,
+              <a
+                
+                class="text-gray-600 hover:text-gray-900"
+                >Maracay, 2024</a
+              >.
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <script>
+    function toggleNavbar(collapseID) {
+      document.getElementById(collapseID).classList.toggle("hidden");
+      document.getElementById(collapseID).classList.toggle("block");
+    }
+  </script>
+</html>

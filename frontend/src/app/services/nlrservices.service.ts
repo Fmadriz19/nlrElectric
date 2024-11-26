@@ -14,7 +14,7 @@ export class NlrservicesService {
 
   // Registros de Usuario
   resgistreUser(credentials: Userregistro): Observable<any>{
-    return this.http.post(`${this.url}/registre`,credentials)
+    return this.http.post(`${this.url}/registre`,credentials);
   }
 
   // Registro de Productos
@@ -48,6 +48,9 @@ export class NlrservicesService {
   }
 
   // Buscar un producto
+  showProduct(credentials: ProductsGeneral): Observable<any>{
+    return this.http.get(`${this.url}/show/product/${credentials}`);
+  }
 
   // importar todos los productos
   indexProducts (credentials: ProductsGeneral): Observable<any>{

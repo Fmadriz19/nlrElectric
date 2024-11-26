@@ -54,8 +54,10 @@ export class UserListComponent implements OnInit {
   visibleUser: boolean = true;
   visibleProduct: boolean = false;
   visibleService: boolean = false;
-
-
+  visibleForms: boolean = false;
+  open: boolean = false;
+  isDropdownVisible: boolean = false;
+  
   // Antiguo dashboard
   usuarios: Users[] = [];
   productsGeneral: ProductsGeneral[] = [];
@@ -119,6 +121,10 @@ export class UserListComponent implements OnInit {
       this.selectedServiceId = event;
     }
     
+  }
+
+  toggleDropdown(): void {
+    this.isDropdownVisible = !this.isDropdownVisible;
   }
 
   /* ---  Apartado de lista de usuarios  --- */
@@ -268,6 +274,7 @@ export class UserListComponent implements OnInit {
     this.visibleUser = true;
     this.visibleService = false;
     this.visibleProduct = false;
+    this.visibleForms = false;
     this.pag_actual = 1;
   }
   
@@ -275,6 +282,15 @@ export class UserListComponent implements OnInit {
     this.visibleUser = false;
     this.visibleService = false;
     this.visibleProduct = true;
+    this.visibleForms = false;
+    this.pag_actual = 1;
+  }
+  
+  selectForms(){
+    this.visibleUser = false;
+    this.visibleService = false;
+    this.visibleProduct = false;
+    this.visibleForms = false;
     this.pag_actual = 1;
   }
 

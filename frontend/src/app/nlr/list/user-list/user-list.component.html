@@ -1,290 +1,3 @@
-<!-- <div class="relative min-h-screen sm:flex sm:flex-row justify-center bg-transparent rounded-3xl shadow-xl">
-
-    <div class="max-w-5xl justify-center self-center z-10 my-20">
-            <p-tabView styleClass="tabview-custom">
-                
-                 Nivel usuario 
-                <p-tabPanel>
-                    <ng-template pTemplate="header">
-
-                        <div class="flex align-items-center gap-2 items-center">
-                            <div class="rounded-full p-2 bg-gray-100">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-sky-600 dark:text-purple-600">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
-                                  </svg>                                  
-                            </div>
-
-                            <span class="font-bold white-space-nowrap m-0 text-sky-600 dark:text-purple-600">
-                                Usuarios
-                            </span>
-                        </div>
-                    </ng-template>
-
-                    <p-table
-                [value]="usuarios"
-                [paginator]="true"
-                [rows]="5"
-                [tableStyle]="{ 'min-width': '50rem' }"
-                [rowsPerPageOptions]="[5, 10, 20]"
-                *ngIf="!skeleton"
-                >
-
-                <ng-template pTemplate="caption">
-                    <div class="flex flex-grow gap-4">
-                        <button (click)="nuevoUsuario()" class="relative basis-1/6 rounded-lg shadow-md p-2 bg-green-500 text-gray-50 font-semibold hover:scale-105 hover:bg-green-700 transition duration-300">
-                            <span class="hover:animate-pulse">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 absolute inset-y-2.5 inset-x-3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                </svg>
-                                Nuevo
-                            </span>
-                        </button>
-
-                        <div class="basis-1/2"></div>
-
-                        <label class="relative basis-2/5">
-                            <span class="sr-only">Search</span>
-                            <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-gray-400 opacity-80">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                                </svg>                                                              </span>
-                            <input class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Search for anything..." type="text" name="search"/>
-                        </label>
-                    </div>
-
-                </ng-template>
-                <ng-template pTemplate="header">
-                    <tr class="text-center">
-                        <th style="width:20%">Nombre</th>
-                        <th style="width:25%">Correo Electronico</th>
-                        <th style="width:20%">Usuario</th>
-                        <th style="width:15%">Rol</th>
-                        <th style="width:20%">Modificar</th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-user>
-                    <tr [ngClass]="{'bg-green-200' : user.rol === 'admin'}">
-                        <td>{{ user.name }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.user }}</td>
-                        <td>{{ user.rol }}</td>
-                        <td>
-                            <div class="flex flex-grow gap-4">
-                                <button (click)="editar(user.id)" class="basis-1/2 rounded-lg shadow-md p-2 bg-green-500 text-gray-50 font-semibold hover:scale-105 hover:bg-green-700 transition duration-300">Editar</button>
-                                <button (click)="eliminar(user.id)" class="basis-1/2 rounded-lg shadow-md p-2 bg-red-500 text-gray-50 font-semibold hover:scale-105 hover:bg-red-700 transition duration-300">Eliminar</button>
-                            </div>
-                        </td>
-                    </tr>
-                </ng-template>
-                    </p-table>
-                    
-                       Skeleton    
-
-                    <p-table
-                        [value]="products"
-                        [paginator]="true"
-                        [rows]="5"
-                        [tableStyle]="{ 'min-width': '50rem' }"
-                        *ngIf="skeleton"
-                        >
-                        <ng-template pTemplate="caption">
-                            <div class="flex flex-grow gap-4">
-                                <button [disabled]="skeleton" [ngClass]="{'bg-green-500 cursor-not-allowed opacity-80' : skeleton}" class="relative basis-1/6 rounded-lg shadow-md p-2 bg-green-500 text-gray-50 font-semibold transition duration-300">
-                                    <span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 absolute inset-y-2.5 inset-x-3">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                        </svg>
-                                        Nuevo
-                                    </span>
-                                </button>
-
-                                <div class="basis-1/2"></div>
-
-                                <label class="relative basis-2/5">
-                                    <span class="sr-only">Search</span>
-                                    <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-gray-400 opacity-80">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                                        </svg>                                                              </span>
-                                    <input [disabled]="skeleton" [ngClass]="{'cursor-not-allowed opacity-80' : skeleton}" class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Search for anything..." type="text" name="search"/>
-                                </label>
-                            </div>
-
-                        </ng-template>
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th style="width:20%">Nombre</th>
-                                <th style="width:25%">Correo Electronico</th>
-                                <th style="width:20%">Usuario</th>
-                                <th style="width:15%">Rol</th>
-                                <th style="width:20%">Modificar</th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-user>
-                            <tr>
-                                <td><p-skeleton /></td>
-                                <td><p-skeleton /></td>
-                                <td><p-skeleton /></td>
-                                <td><p-skeleton /></td>
-                                <td>
-                                    <div class="flex flex-grow gap-4">
-                                        <p-skeleton width="4rem" height="2rem" />
-                                        <p-skeleton width="4rem" height="2rem" />
-                                    </div>
-                                </td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-                </p-tabPanel>
-
-                 Nivel Producto 
-                <p-tabPanel>
-                    <ng-template pTemplate="header">
-
-                        <div class="flex align-items-center gap-2 items-center">
-                            <div class="rounded-full p-2 bg-gray-100">
-                                <svg class="size-6 dark:fill-[#9333ea] fill-[#0284c7]" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
-
-                                    <path d="M423.3 440.7c0 25.3-20.3 45.6-45.6 45.6s-45.8-20.3-45.8-45.6 20.6-45.8 45.8-45.8c25.4 0 45.6 20.5 45.6 45.8zm-253.9-45.8c-25.3 0-45.6 20.6-45.6 45.8s20.3 45.6 45.6 45.6 45.8-20.3 45.8-45.6-20.5-45.8-45.8-45.8zm291.7-270C158.9 124.9 81.9 112.1 0 25.7c34.4 51.7 53.3 148.9 373.1 144.2 333.3-5 130 86.1 70.8 188.9 186.7-166.7 319.4-233.9 17.2-233.9z"></path>
-                                  
-                                </svg>                                 
-                            </div>
-
-                            <span class="font-bold white-space-nowrap m-0 text-sky-600 dark:text-purple-600">
-                                Productos
-                            </span>
-                        </div>
-                    </ng-template>
-
-                    <p-table
-                        [value]="productsGeneral"
-                        [paginator]="true"
-                        [rows]="5"
-                        [tableStyle]="{ 'min-width': '50rem' }"
-                        [rowsPerPageOptions]="[5, 10, 20]"
-                        *ngIf="!skeleton"
-                        >
-
-                        <ng-template pTemplate="caption">
-                            <div class="flex flex-grow gap-4">
-                                <button (click)="nuevoProducto()" class="relative basis-1/6 rounded-lg shadow-md p-2 bg-green-500 text-gray-50 font-semibold hover:scale-105 hover:bg-green-700 transition duration-300">
-                                    <span class="hover:animate-pulse">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 absolute inset-y-2.5 inset-x-3">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                        </svg>
-                                        Nuevo
-                                    </span>
-                                </button>
-
-                                <div class="basis-1/2"></div>
-
-                                <label class="relative basis-2/5">
-                                    <span class="sr-only">Search</span>
-                                    <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-gray-400 opacity-80">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                                        </svg>                                                              </span>
-                                    <input class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Search for anything..." type="text" name="search"/>
-                                </label>
-                            </div>
-
-                        </ng-template>
-                        <ng-template pTemplate="header">
-                            <tr class="text-center">
-                                <th style="width:20%">Nombre</th>
-                                <th style="width:25%">Precio</th>
-                                <th style="width:20%">Marca</th>
-                                <th style="width:15%">Modelo</th>
-                                <th style="width:20%">Modificar</th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-product>
-                            <tr [ngClass]="{'bg-green-200' : product.estado === ''}">
-                                <td>{{ product.name }}</td>
-                                <td>$ {{ product.price }}</td>
-                                <td>{{ product.marca }}</td>
-                                <td>{{ product.model }}</td>
-                                <td>
-                                    
-                                    <div>
-                                        <p-splitButton 
-                                            label="Actualizar" 
-                                            [model]="items" 
-                                            (onClick)="update(product.id)" 
-                                            (onDropdownClick)="onDropdownClick(product.id)" 
-                                            raised 
-                                            text 
-                                            severity="info"
-                                            size="small"/>
-                                    </div>
-                                </td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-                    
-                        Skeleton     
-                    <p-table
-                        [value]="products"
-                        [paginator]="true"
-                        [rows]="5"
-                        [tableStyle]="{ 'min-width': '50rem' }"
-                        *ngIf="skeleton"
-                        >
-                        <ng-template pTemplate="caption">
-                            <div class="flex flex-grow gap-4">
-                                <button [disabled]="skeleton" [ngClass]="{'bg-green-500 cursor-not-allowed opacity-80' : skeleton}" class="relative basis-1/6 rounded-lg shadow-md p-2 bg-green-500 text-gray-50 font-semibold transition duration-300">
-                                    <span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 absolute inset-y-2.5 inset-x-3">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                        </svg>
-                                        Nuevo
-                                    </span>
-                                </button>
-
-                                <div class="basis-1/2"></div>
-
-                                <label class="relative basis-2/5">
-                                    <span class="sr-only">Search</span>
-                                    <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-gray-400 opacity-80">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                                        </svg>                                                              </span>
-                                    <input [disabled]="skeleton" [ngClass]="{'cursor-not-allowed opacity-80' : skeleton}" class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Search for anything..." type="text" name="search"/>
-                                </label>
-                            </div>
-
-                        </ng-template>
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th style="width:20%">Nombre</th>
-                                <th style="width:25%">Correo Electronico</th>
-                                <th style="width:20%">Usuario</th>
-                                <th style="width:15%">Rol</th>
-                                <th style="width:20%">Modificar</th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-user>
-                            <tr>
-                                <td><p-skeleton /></td>
-                                <td><p-skeleton /></td>
-                                <td><p-skeleton /></td>
-                                <td><p-skeleton /></td>
-                                <td>
-                                    <div class="flex flex-grow gap-4">
-                                        <p-skeleton width="4rem" height="2rem" />
-                                        <p-skeleton width="4rem" height="2rem" />
-                                    </div>
-                                </td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-                </p-tabPanel>
-
-            </p-tabView>
-
-        </div>
-</div> -->
-
 
 <div>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
@@ -342,7 +55,7 @@
                 </a>
 
                 <a
-                    class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                    class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 cursor-pointer">
                     <svg class="w-6 h-6 fill-[#8e8e8e]" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
 
                         <path
@@ -353,25 +66,111 @@
 
                     <span class="mx-3">Servicios</span>
                 </a>
+                
+                <div class="relative">
+                    <!-- Botón para mostrar/ocultar el dropdown -->
+                    <button (click)="toggleDropdown()" class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:text-gray-100 hover:cursor-pointer">
+                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                            </path>
+                        </svg>
+
+                        <span class="mx-3 flex">
+                            Formularios
+                        </span>
+                        <svg
+                            [ngClass]="{'rotate-180': isDropdownVisible, 'rotate-0': !isDropdownVisible}"
+                            class="w-4 h-4 transform transition-transform"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                  
+                    <!-- Dropdown -->
+                    <ul *ngIf="isDropdownVisible" class="text-gray-500 text-sm px-6 items-center mt-1 rounded shadow-lg w-full z-10">
+                        <li>
+                            <a
+                                class="flex items-center px-6 py-2 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+            
+                                <svg class="w-4 h-4 fill-[#8e8e8e]" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+
+                                    <path
+                                        d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z">
+                                    </path>
+            
+                                </svg>
+                                <span class="mx-3">Registrar Usuario</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                class="flex items-center px-6 py-2 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                                <svg class="w-4 h-4 fill-[#8e8e8e]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+
+                                    <path
+                                        d="M176 88v40H336V88c0-4.4-3.6-8-8-8H184c-4.4 0-8 3.6-8 8zm-48 40V88c0-30.9 25.1-56 56-56H328c30.9 0 56 25.1 56 56v40h28.1c12.7 0 24.9 5.1 33.9 14.1l51.9 51.9c9 9 14.1 21.2 14.1 33.9V304H384V288c0-17.7-14.3-32-32-32s-32 14.3-32 32v16H192V288c0-17.7-14.3-32-32-32s-32 14.3-32 32v16H0V227.9c0-12.7 5.1-24.9 14.1-33.9l51.9-51.9c9-9 21.2-14.1 33.9-14.1H128zM0 416V336H128v16c0 17.7 14.3 32 32 32s32-14.3 32-32V336H320v16c0 17.7 14.3 32 32 32s32-14.3 32-32V336H512v80c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64z">
+                                    </path>
+            
+                                </svg>
+                                <span class="mx-3">Registrar Producto</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                class="flex items-center px-6 py-2 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                                <svg class="w-4 h-4 fill-[#8e8e8e]" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+
+                                    <path
+                                        d="M48 0C21.5 0 0 21.5 0 48V368c0 26.5 21.5 48 48 48H64c0 53 43 96 96 96s96-43 96-96H384c0 53 43 96 96 96s96-43 96-96h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V288 256 237.3c0-17-6.7-33.3-18.7-45.3L512 114.7c-12-12-28.3-18.7-45.3-18.7H416V48c0-26.5-21.5-48-48-48H48zM416 160h50.7L544 237.3V256H416V160zM112 416a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm368-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z">
+                                    </path>
+            
+                                </svg>
+                                <span class="mx-3">Registrar Servicio</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                class="flex items-center px-6 py-2 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                    </path>
+                                </svg>
+                                <span class="mx-3">Registrar Factura</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                  
 
                 <a
-                    class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
-                        </path>
-                    </svg>
+                    class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 cursor-pointer " href="search/product">
+                    <svg class="w-6 h-6 fill-[#8e8e8e]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
 
-                    <span class="mx-3">Forms</span>
+                        <path 
+                            d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64H348.7c2.2 20.4 3.3 41.8 3.3 64zm28.8-64H503.9c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64zm112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6c78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7c10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5c11.6 26 20.9 58.2 27 94.7zm-209 0H18.6C48.6 85.9 112.2 29.1 190.6 8.4C165.1 42.6 145.3 96.1 135.3 160zM8.1 192H131.2c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64zM194.7 446.6c-11.6-26-20.9-58.2-27-94.6H344.3c-6.1 36.4-15.5 68.6-27 94.6c-10.5 23.6-22.2 40.7-33.5 51.5C272.6 508.8 263.3 512 256 512s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6C112.2 482.9 48.6 426.1 18.6 352H135.3zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6c25.5-34.2 45.2-87.7 55.3-151.6H493.4z">
+                        </path>
+                      
+                      </svg>
+
+                    <span class="mx-3">Explorar Productos</span>
                 </a>
+                
             </nav>
         </div>
+
         <div class="flex flex-col flex-1 overflow-hidden">
 
             <!-- Navbar -->
             <header
-                class="flex items-center justify-between px-6 py-4 border-b-4 border-indigo-600 bg-sky-600 transition ease-in duration-500 dark:bg-gray-900">
+                class="flex items-center justify-between px-6 py-4 border-b-4 border-blue-800 bg-blue-800 transition ease-in duration-500 dark:bg-gray-900">
                 <div class="flex items-center">
                     <button (click)="sidebarOpen = true" class="text-gray-500 focus:outline-none lg:hidden">
                         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -403,8 +202,8 @@
                     
                               <p-tieredMenu #menu [model]="items" [popup]="true" /> -->
 
-                    <button type="button" (click)="modeDark()" class="relative mr-2 rounded-full bg-sky-600 p-1 text-gray-200 hover:text-white hover:border-gray-200 hover:bg-gray-900 transition ease-in duration-500 dark:bg-gray-900
-                              dark:hover:bg-sky-600 dark:text-yellow-300 dark:hover:text-yellow-400">
+                    <button type="button" (click)="modeDark()" class="relative mr-2 rounded-full bg-blue-800 p-1 text-gray-200 hover:text-white hover:border-gray-200 hover:bg-gray-900 transition ease-in duration-500 dark:bg-gray-900
+                              dark:hover:bg-blue-800 dark:text-yellow-300 dark:hover:text-yellow-400">
 
                         <!-- modo claro -->
                         <svg *ngIf="darkMode" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -423,7 +222,7 @@
                     </button>
 
                     <button type="button"
-                        class="relative rounded-full bg-green-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        class="relative rounded-full bg-blue-800 p-1 text-gray-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span class="absolute -inset-1.5"></span>
                         <span class="sr-only">View notifications</span>
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -460,7 +259,7 @@
                             <a (click)="visibleMenuAvatar()" class="block px-4 py-2 text-sm text-gray-700"
                                 role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
                             <a (click)="cerrarSession()"
-                                class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:text-slate-200 hover:bg-sky-700"
+                                class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:text-slate-200 hover:bg-blue-800"
                                 role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
                         </div>
                     </div>

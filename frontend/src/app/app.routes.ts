@@ -11,9 +11,13 @@ import { adminGuard, loginGuard, noLogin, rolesGuard } from './guards/login.guar
 import { UserListComponent } from './nlr/list/user-list/user-list.component';
 import { UsersEditComponent } from './nlr/edit/users-edit/users-edit.component';
 import { NewUserComponent } from './nlr/registre/new-user/new-user.component';
+import { StoreProductComponent } from './nlr/home/store-product/store-product.component';
+import { StoreServicesComponent } from './nlr/home/store-services/store-services.component';
+import { ViewproductsComponent } from './nlr/view/viewproducts/viewproducts.component';
+import { SearchProductsComponent } from './nlr/search-products/search-products.component';
 
 export const routes: Routes = [
-    { path: 'home', component: HomeComponent, title: 'Home'},
+    { path: '', component: HomeComponent, title: 'Home'},
     { path: 'registre', component: UsersComponent, title: 'Registro de usuario', canActivate: [noLogin]},
     { path: 'login', component: LoginComponent, title: 'Inicio de sesión', canActivate: [noLogin]},
     { path: 'recovere', component: RecoverEmailComponent, title: 'Confirmar Email', canActivate: [noLogin]},
@@ -24,4 +28,8 @@ export const routes: Routes = [
     { path: 'edit/product', component: ProductsEditComponent, title: 'Editar Producto', canActivate: [loginGuard, rolesGuard]},
     { path: 'edit/user', component: UsersEditComponent, title: 'Editar Usuario', canActivate: [loginGuard]},
     { path: 'list', component: UserListComponent, title: 'Lista de Usuarios', canActivate: [loginGuard, adminGuard]},
+    { path: 'products', component: StoreProductComponent, title: 'Tienda de Productos'},
+    { path: 'services', component: StoreServicesComponent, title: 'Tienda de Servicios'},
+    { path: 'products/view', component: ViewproductsComponent, title: 'Vista del Producto'},
+    { path: 'search/product', component: SearchProductsComponent, title: 'Explorar Productos', canActivate: [loginGuard, adminGuard]},
 ]

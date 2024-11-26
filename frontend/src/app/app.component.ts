@@ -1,4 +1,4 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './nlr/navbar/navbar.component';
 import { NlrservicesService } from './services/nlrservices.service';
@@ -6,6 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { UsersComponent } from './nlr/registre/users/users.component';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { ProductsimgService } from './services/productsimg.service';
+import { ScrapingService } from './services/scraping.service';
 
 @Component({
   selector: 'app-root',
@@ -13,14 +14,16 @@ import { ProductsimgService } from './services/productsimg.service';
   providers: [NgModule, NlrservicesService, CookieService, ProductsimgService],
   imports: [CommonModule, NavbarComponent, UsersComponent, RouterModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'frontend';
+
+  private intevaloID: any;
 
   showNavbar: boolean = true;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private tasa: ScrapingService) {}
 
   ngOnInit(): void {
     this.router.events.subscribe(event => {
@@ -34,5 +37,18 @@ export class AppComponent implements OnInit {
         }
       }
     });
+
+    this.intevaloID = setInterval(() => this.actualizarTasa(), 43200000);
+  }
+
+  actualizarTasa(){
+    this.tasa.getApi()
+
+  }
+
+  ngOnDestroy(){
+    if (this.intevaloID){
+      clearInterval(this.intevaloID);
+    }
   }
 }

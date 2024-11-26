@@ -101,8 +101,7 @@ export class RecoverCodeComponent implements OnInit {
   getCookie(){
     const valor = this.cookie.get('id_verificacion');
     this.valor.email = this.cookie.get('email_verificacion');
-    /* this.buscarUser(valor); */
-    this.buscarUser('3');
+    this.buscarUser(valor);
   }
 
   /* Extraer de la Cookie */

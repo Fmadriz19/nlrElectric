@@ -75,3 +75,24 @@ export interface ProductsGeneral{
     voltaje: string;
     showFullDescription: boolean;
 }
+
+export interface Marcas{
+    name: String;
+    cantidad: number;
+}
+
+export interface ApiResponse {
+    change: number;
+    color: string;
+    image: string;
+    last_update: string;
+    percent: number;
+    price: number; 
+    price_old: number;
+    symbol: string;
+    title: string;
+}
+
+export interface searchProduct{
+    message:string;
+}

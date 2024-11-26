@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\TasaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -41,8 +42,14 @@ Route::get('/view/factura', [ServiceController::class,'index']);
 Route::post('/registre/factura', [ServiceController::class,'store']);
 Route::get('/show/factura/{id}', [ServiceController::class,'show']);
 Route::put('/update/factura/{id}', [ServiceController::class,'update']);
+Route::put('/update/factura/{id}', [ServiceController::class,'update']);
 Route::delete('/delete/factura/{id}', [ServiceController::class,'destroy']);
 
+/* ---- Tasa del bcv ---- */
+
+Route::get('/view/tasa', [TasaController::class, 'index']);
+Route::post('/registre/tasa', [TasaController::class, 'store']);
+Route::put('/update/tasa', [TasaController::class, 'update']);
 
 /* ---- Envio de correo ---- */
 Route::post('/send', [UserController::class, 'send']);

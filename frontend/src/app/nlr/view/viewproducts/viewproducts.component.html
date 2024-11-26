@@ -1,0 +1,68 @@
+<div class="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex justify-end mb-4">
+            <Button
+            variant="outline"
+            size="icon"
+            onClick={toggleDarkMode}
+            class="rounded-full">
+            </Button>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden mt-20">
+            <div class="lg:flex">
+                <div class="md:flex-shrink-0">
+                    <img
+                    class="h-full w-full object-cover"
+                    [src]="product.img"
+                    alt="Producto seleccionado"
+                    />
+                </div>
+                <div class="p-8">
+
+                    <div class="uppercase tracking-wide text-xs text-[#0ea5e9] dark:text-[#9333ea] font-semibold">
+                        Producto Seleccionado
+                    </div>
+
+                    <h2 class="mt-2 text-xl font-semibold text-gray-900 dark:text-white">
+                        {{product.name}}
+                    </h2>
+
+                    <p class="mt-2 text-gray-600 dark:text-gray-300">
+                        {{product.descripcion}}
+                    </p>
+                    
+                    <div class="mt-4">
+                        <span class="text-2xl font-bold text-[#0ea5e9] dark:text-[#9333ea]">${{product.price}}</span>
+                        <span class="text-2xl font-bold text- dark:text-[#9333ea]">${{pricebcv}}</span>
+                    </div>
+
+                    <div class="mt-4 flex items-center">
+                        <!-- {[1, 2, 3, 4, 5].map((star) => (
+                            <svg
+                            key={star}
+                            class="h-5 w-5 fill-current text-yellow-500"
+                            viewBox="0 0 24 24"
+                            >
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                            </svg>
+                        ))} -->
+                        <span class="ml-2 text-gray-600 dark:text-gray-300">(128 reseñas)</span>
+                    </div>
+                    <div class="mt-6">
+                        <button class="CartBtn w-40">
+                            <span class="IconContainer"> 
+                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart">
+                                    <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z">
+    
+                                    </path>
+                                </svg>
+                            </span>
+                            <p class="text">Add to Cart</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
