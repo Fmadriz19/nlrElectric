@@ -11,17 +11,12 @@
             class="fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform bg-gray-900 lg:translate-x-0 lg:static lg:inset-0">
             <div class="flex items-center justify-center mt-8">
                 <div class="flex items-center">
-                    <svg class="w-12 h-12" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M364.61 390.213C304.625 450.196 207.37 450.196 147.386 390.213C117.394 360.22 102.398 320.911 102.398 281.6C102.398 242.291 117.394 202.981 147.386 172.989C147.386 230.4 153.6 281.6 230.4 307.2C230.4 256 256 102.4 294.4 76.7999C320 128 334.618 142.997 364.608 172.989C394.601 202.981 409.597 242.291 409.597 281.6C409.597 320.911 394.601 360.22 364.61 390.213Z"
-                            fill="#4C51BF" stroke="#4C51BF" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                        <path
-                            d="M201.694 387.105C231.686 417.098 280.312 417.098 310.305 387.105C325.301 372.109 332.8 352.456 332.8 332.8C332.8 313.144 325.301 293.491 310.305 278.495C295.309 263.498 288 256 275.2 230.4C256 243.2 243.201 320 243.201 345.6C201.694 345.6 179.2 332.8 179.2 332.8C179.2 352.456 186.698 372.109 201.694 387.105Z"
-                            fill="white"></path>
+                    <svg class="h-9 w-9" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2">
+                        <path d="M8 52h6.92A3.083 3.083 0 0 0 18 48.92V36.08A3.083 3.083 0 0 0 14.92 33H8M18 37l3.198-.853a14.561 14.561 0 0 1 8.51.309l7.245 2.508c1 .347 2.089.333 3.08-.039l4.777-1.791a2.275 2.275 0 0 1 2.692.868 1.682 1.682 0 0 1-.565 2.391L41.5 43.5M33 27.144a5.513 5.513 0 0 0-1.735-4.015A6.897 6.897 0 0 1 29 18c0-3.863 3.137-7 7-7s7 3.137 7 7a6.982 6.982 0 0 1-2.191 5.085 5.85 5.85 0 0 0-1.793 4.215c-.016.001-.016.002-.016.003a1.437 1.437 0 0 1-1.674 1.418l-3.484-.581a1.007 1.007 0 0 1-.842-.994v-.002z" style="fill:none;stroke:#f9fafb;stroke-width:1.5px"/>
+                        <path d="m23 49.849 13.904.97a6.936 6.936 0 0 0 4.671-1.39l14.947-11.31a1.863 1.863 0 0 0 .366-2.602l-.002-.002a.891.891 0 0 0-.997-.311L47.5 38M22 40s3.718-1.692 7 0M33 31l6 1M35 33.833l2 .334" style="fill:none;stroke:#f9fafb;stroke-width:1.5px"/>
                     </svg>
 
-                    <span class="mx-2 text-2xl font-semibold text-white">Dashboard</span>
+                    <span class="mx-2 text-2xl font-semibold text-white">Administrador</span>
                 </div>
             </div>
 
@@ -54,8 +49,9 @@
                     <span class="mx-3">Productos</span>
                 </a>
 
-                <a
-                    class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 cursor-pointer">
+                <a (click)="selectService()"
+                [ngClass]="visibleService ? 'bg-gray-700 text-gray-100 bg-opacity-25' : 'text-gray-500 hover:text-gray-100 hover:cursor-pointer'"
+                class="flex items-center px-6 py-2 mt-4">
                     <svg class="w-6 h-6 fill-[#8e8e8e]" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
 
                         <path
@@ -95,8 +91,9 @@
                     <!-- Dropdown -->
                     <ul *ngIf="isDropdownVisible" class="text-gray-500 text-sm px-6 items-center mt-1 rounded shadow-lg w-full z-10">
                         <li>
-                            <a
-                                class="flex items-center px-6 py-2 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                            <a (click)="selectUserForm()"
+                                [ngClass]="visibleFormUser ? 'bg-gray-700 text-gray-100 bg-opacity-25' : 'text-gray-500 hover:text-gray-100 hover:cursor-pointer'"
+                                class="flex items-center px-6 py-2 mt-4">
             
                                 <svg class="w-4 h-4 fill-[#8e8e8e]" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
 
@@ -109,8 +106,9 @@
                             </a>
                         </li>
                         <li>
-                            <a
-                                class="flex items-center px-6 py-2 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                            <a (click)="selectProductForm()"
+                            [ngClass]="visibleFormProduct ? 'bg-gray-700 text-gray-100 bg-opacity-25' : 'text-gray-500 hover:text-gray-100 hover:cursor-pointer'"
+                            class="flex items-center px-6 py-2 mt-4">
                                 <svg class="w-4 h-4 fill-[#8e8e8e]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
 
                                     <path
@@ -122,8 +120,9 @@
                             </a>
                         </li>
                         <li>
-                            <a
-                                class="flex items-center px-6 py-2 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                            <a (click)="selectServiceForm()"
+                                [ngClass]="visibleFormServicio ? 'bg-gray-700 text-gray-100 bg-opacity-25' : 'text-gray-500 hover:text-gray-100 hover:cursor-pointer'"
+                                class="flex items-center px-6 py-2 mt-4">
                                 <svg class="w-4 h-4 fill-[#8e8e8e]" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
 
                                     <path
@@ -135,8 +134,9 @@
                             </a>
                         </li>
                         <li>
-                            <a
-                                class="flex items-center px-6 py-2 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                            <a (click)="selectFacturaForm()"
+                                [ngClass]="visibleFormFactura ? 'bg-gray-700 text-gray-100 bg-opacity-25' : 'text-gray-500 hover:text-gray-100 hover:cursor-pointer'"
+                                class="flex items-center px-6 py-2 mt-4">
                                 <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -179,20 +179,16 @@
                         </svg>
                     </button>
 
-                    <div class="relative mx-4 lg:mx-0">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                            <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none">
-                                <path
-                                    d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                        </span>
-
-                        <input class="w-32 pl-10 pr-4 rounded-md form-input sm:w-64 focus:border-indigo-600" type="text"
-                            placeholder="Search">
-                    </div>
+                    <div class="hidden sm:ml-6 sm:block">
+                        <div class="flex space-x-4">
+                          <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                          <a href="" class="rounded-md px-3 py-2 text-sm font-medium text-gray-100 hover:bg-gray-700 hover:text-white">Inicio</a>
+                          <a href="products" class="rounded-md px-3 py-2 text-sm font-medium text-gray-100 hover:bg-gray-700 hover:text-white">Productos</a>
+                          <a href="services" class="rounded-md px-3 py-2 text-sm font-medium text-gray-100 hover:bg-gray-700 hover:text-white">Servicios</a>
+                          <a href="contactanos" class="rounded-md px-3 py-2 text-sm font-medium text-gray-100 hover:bg-gray-700 hover:text-white">Contactanos</a>
+                          <a href="sobre_nosotros" class="rounded-md px-3 py-2 text-sm font-medium text-gray-100 hover:bg-gray-700 hover:text-white">Sobre nosotros</a>
+                        </div>
+                      </div>
                 </div>
 
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -272,9 +268,9 @@
 
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
                 <div class="container px-6 py-8 mx-auto">
-                    <h3 class="text-3xl font-medium text-gray-700">Dashboard</h3>
+                    <h3 class="text-3xl font-medium text-gray-700"> {{titulo}} </h3>
 
-                    <div class="mt-4">
+                    <div *ngIf="visiblePaneles" class="mt-4">
                         <div class="flex flex-wrap -mx-6">
                             <div class="w-full px-6 sm:w-1/2 xl:w-1/3">
                                 <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
@@ -356,9 +352,30 @@
                         </div>
                     </div>
 
-                    <div class="mt-8">
-
+                    <div class="mt-2">
+                        <app-new-user *ngIf="visibleFormUser" (userRegistered)="getUsers()"></app-new-user>
+                        <app-products *ngIf="visibleFormProduct" (productRegistered)="getProducts()"></app-products>
+                        <app-servicios *ngIf="visibleFormServicio" (servicioRegistered)="getServices()"></app-servicios>
+                        <app-factura *ngIf="visibleFormFactura" (facturaRegistered)="getFacturas()"></app-factura>
                     </div>
+
+                    <!--  Barra de búsqueda  -->
+
+                        <form *ngIf="barra_search" class="max-w-xl mx-auto mb-6">   
+                            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                            <div class="relative">
+
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                    </svg>
+                                </div>
+
+                                <input name="searchText" type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos..." required [(ngModel)]="searchText" />
+
+                                <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+                            </div>
+                        </form>
 
                     <!-- Tabla de Usuarios -->
                     <div *ngIf="visibleUser" class="flex flex-col mt-8">
@@ -376,17 +393,17 @@
                                                 Datos</th>
                                             <th
                                                 class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                Direccion</th>
+                                                Dirección</th>
                                             <th
                                                 class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                Roles</th>
+                                                Rol</th>
                                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
                                         </tr>
                                     </thead>
 
                                     <tbody class="bg-white">
-                                        @for (user of getUsersPag(); track $index) {
-                                        <tr>
+                                        <!-- @for (user of getUsersPag(); track $index) { -->
+                                        <tr *ngFor="let user of getUsersPag() | search: searchText ">
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 <div class="flex items-center">
                                                     <div class="flex-shrink-0 w-10 h-10">
@@ -438,7 +455,7 @@
                                                         size="small"/>
                                                 </div>                                            </td>
                                         </tr>
-                                        }
+                                        
 
                                     </tbody>
 
@@ -459,19 +476,19 @@
                                     <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
                                         <div>
                                             <p class="text-sm text-gray-700">
-                                                Showing
+                                                Mostrando de
                                                 <span class="font-medium">
                                                     {{(pag_actual - 1) * pagination + 1}}
                                                 </span>
-                                                to
+                                                a
                                                 <span class="font-medium">
                                                     {{ rangoUsuarios().fin }}
                                                 </span>
-                                                of
+                                                de
                                                 <span class="font-medium">
                                                     {{total_users}}
                                                 </span>
-                                                results
+                                                resultados
                                             </p>
                                         </div>
                                         <div>
@@ -533,10 +550,10 @@
                                                 Datos</th>
                                             <th
                                                 class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                Model</th>
+                                                Modelo</th>
                                             <th
                                                 class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                Price</th>
+                                                Precio</th>
                                             <th
                                                 class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                                 Stock</th>
@@ -545,7 +562,7 @@
                                                 Estado</th>
                                             <th
                                                 class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                Codigo</th>
+                                                Código</th>
                                             <th
                                                 class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                                 Descripción</th>
@@ -704,19 +721,176 @@
                                     <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
                                         <div>
                                             <p class="text-sm text-gray-700">
-                                                Showing
+                                                Mostrando de
                                                 <span class="font-medium">
                                                     {{(pag_actual - 1) * pagination + 1}}
                                                 </span>
-                                                to
+                                                a
                                                 <span class="font-medium">
                                                     {{ rangoUsuarios().fin }}
                                                 </span>
-                                                of
+                                                de
                                                 <span class="font-medium">
                                                     {{total_products}}
                                                 </span>
-                                                results
+                                                resultados
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm"
+                                                aria-label="Pagination">
+                                                <a (click)="nextPag(pag_actual - 1)"
+                                                    class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                                    [class.disabled]="pag_actual === 1">
+                                                    <span class="sr-only">Previous</span>
+                                                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
+                                                        aria-hidden="true" data-slot="icon">
+                                                        <path fill-rule="evenodd"
+                                                            d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                </a>
+
+                                                <ng-container
+                                                    *ngFor="let pagina of [].constructor(totalPag()); let i = index">
+                                                    <a (click)="nextPag(i + 1)"
+                                                        [ngClass]="{'bg-indigo-600 text-white': (i + 1) === pag_actual, 'text-gray-900': (i + 1) !== pag_actual}"
+                                                        class="relative inline-flex items-center px-4 py-2 text-sm font-semibold ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                                                        {{ i + 1 }}
+                                                    </a>
+                                                </ng-container>
+
+                                                <a (click)="nextPag(pag_actual + 1)"
+                                                    class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                                    [class.disabled]="pag_actual === totalPag()">
+                                                    <span class="sr-only">Next</span>
+                                                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
+                                                        aria-hidden="true" data-slot="icon">
+                                                        <path fill-rule="evenodd"
+                                                            d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                </a>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de Servicios -->
+                    <div *ngIf="visibleService" class="flex flex-col mt-8">
+                        <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+                            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                                Nombre</th>
+                                            <th
+                                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                                Tiempo de ejecución</th>
+                                            <th
+                                               class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                                Descripción</th>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody class="bg-white">
+                                        @for (service of getServicePag(); track $index) {
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <div class="flex items-center">
+                                                    <div class="flex-shrink-0 w-10 h-10">
+                                                        <img class="w-10 h-10 rounded-lg"
+                                                            [src]="service.img"
+                                                            alt="">
+                                                    </div>
+
+                                                    <div class="ml-4">
+                                                        <div class="text-sm font-medium leading-5 text-gray-900">
+                                                            {{service.name}}</div>
+                                                        </div>
+                                                </div>
+                                            </td>
+
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <span
+                                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-gray-900">
+                                                    {{service.ejecucion}}
+                                                </span>
+                                            </td>
+
+                                            <td class="min-w-64 px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
+                                                <div *ngIf="!service.showFullDescription">
+                                                    <span class="inline-flex px-2 text-xs font-semibold leading-5">
+                                                        {{ service.descripcion | slice:0:100 }}... 
+                                                    </span>
+                                                </div>
+                                                <div [ngClass]="service.descripcion.toLowerCase() == 'sin descripcion' ? 'hidden' : ''" class="flex justify-center">
+                                                    <button (click)="toggleDescription(service)" class="text-blue-500">
+                                                        {{ service.showFullDescription ? 'Ver menos' : 'Ver más' }}
+                                                    </button>
+                                                </div>
+                                                <div *ngIf="service.showFullDescription">
+                                                    <span class="inline-flex px-2 text-xs font-semibold leading-5">
+                                                        {{ service.descripcion }}
+                                                    </span>
+                                                </div>
+                                            </td>
+
+                                            <td class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
+                                                <div>
+                                                    <p-splitButton 
+                                                        label="Actualizar" 
+                                                        [model]="itemsService" 
+                                                        (onClick)="updateService(service.id)" 
+                                                        (onDropdownClick)="onDropdownClick(service.id)" 
+                                                        raised 
+                                                        text 
+                                                        severity="info"
+                                                        size="small"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        }
+
+                                    </tbody>
+
+
+                                </table>
+
+                                <!-- PAGINATION -->
+                                <div
+                                    class=" flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+                                    <div class="flex flex-1 justify-between sm:hidden">
+                                        <a
+                                            class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
+
+                                        <a
+                                            class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
+                                    </div>
+
+                                    <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+                                        <div>
+                                            <p class="text-sm text-gray-700">
+                                                Mostrando de
+                                                <span class="font-medium">
+                                                    {{(pag_actual - 1) * pagination + 1}}
+                                                </span>
+                                                a
+                                                <span class="font-medium">
+                                                    {{ rangoUsuarios().fin }}
+                                                </span>
+                                                de
+                                                <span class="font-medium">
+                                                    {{total_servicios}}
+                                                </span>
+                                                resultados
                                             </p>
                                         </div>
                                         <div>
@@ -767,4 +941,382 @@
             </main>
         </div>
     </div>
+</div>
+
+<!-- Editar Usuario -->
+<div class="card flex justify-content-center">
+
+    <p-toast />
+    <p-confirmDialog />
+
+    <!-- -------------- REGISTRAR -------------- -->
+    <!-- USUARIOS -->
+    <!-- FACTURAS -->
+
+    <!-- -------------- ACTUALIZAR -------------- -->
+    <!-- USUARIOS -->
+    <p-dialog *ngIf="visibleUser" header="Actualizar datos del Usuario" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }">
+
+        <form class="w-full mx-auto">
+
+            <div class="space-y-4">
+
+                <div class="lg:flex lg:flex-row gap-4 md:grid-row md:space-y-4">
+
+                    <div class="basis-1/2 md:mt-4">
+                        <div class="flex justify-center items-center relative">
+                            <input name="name"
+                                required [ngClass]="{'border-red-500': errores.name}" class="w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                                type="text" [(ngModel)]="inforUser.name">
+                            <span [ngClass]="{'text-red-500': errores.name}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
+                                Nombre
+                            </span>
+                        </div>
+                        <p *ngIf="errores.name" class="text-sm ms-1 text-red-500 py-2">{{this.errores.name}}</p>
+                    </div>
+
+
+                    <div class="basis-1/2">
+                        <div class="flex justify-center items-center relative">
+                            <select [(ngModel)]="inforUser.rol" [ngClass]="{'border-red-500': errores.rol}" name="rol" id="" class="w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit">
+                                <option value="">Seleccionar rol</option>
+                                <option value="admin">Administrador</option>
+                                <option value="compras">Compras</option>
+                                <option value="ventas">Ventas</option>
+                                <option value="cliente">Cliente</option>
+                            </select>
+                            <span [ngClass]="{'text-red-500': errores.rol}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
+                                Rol
+                            </span>
+                        </div>
+                        <p *ngIf="errores.rol" class="text-sm ms-1 text-red-500 py-2">{{this.errores.rol}}</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-row gap-4">
+
+                    <div class="basis-1/2">
+                        <div class="flex justify-center items-center relative">
+                            <input name="email"
+                                required [ngClass]="{'border-red-500': errores.email}" class="w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                                type="email" [(ngModel)]="inforUser.email">
+                            <span [ngClass]="{'text-red-500': errores.email}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
+                                Correo Electronico
+                            </span>
+                        </div>
+                        <p *ngIf="errores.email" class="text-sm ms-1 text-red-500 py-2">{{this.errores.email}}</p>
+                    </div>
+                    
+
+                    <div class="basis-1/2">
+                        <div class="flex justify-center items-center relative">
+                            
+                            <input name="user"
+                                required [ngClass]="{'border-red-500': errores.user}" class=" w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                                type="text" [(ngModel)]="inforUser.user">
+                            <span [ngClass]="{'text-red-500': errores.user}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
+                                Usuario
+                            </span>
+                        </div>
+                        <p *ngIf="errores.user" class="text-sm ms-1 text-red-500 py-2">{{this.errores.user}}</p>
+                    </div>
+                </div>
+                
+                <div class="flex flex-row gap-4">
+
+                    <div class="basis-1/2">
+                        <div class="flex justify-center items-center relative">
+                            <input name="password" [type]="passwordPass ? 'text' : 'password'" [(ngModel)]="inforUser.password"
+                            required [ngClass]="{'border-red-500' : errores.password}" class="w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit" >
+        
+                            <span [ngClass]="{'text-red-500' : errores.password}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
+                                Contraseña
+                            </span>
+        
+                            <!-- ojo abierto -->
+                            <div class="flex items-center absolute inset-y-0 right-5 mr-3 text-sm leading-5 cursor-pointer">
+        
+                                <svg *ngIf="passwordPassSVG" (click)="inputPass()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor" class="absolute size-6 text-slate-600 hover:scale-105 hover:text-slate-800">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                </svg>
+        
+                                <!-- ojo cerrado -->
+                                <svg *ngIf="!passwordPassSVG" xmlns="http://www.w3.org/2000/svg" (click)="inputPass()"  fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="absolute size-6 text-slate-600 hover:scale-105 hover:text-slate-800">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
+                                </svg>
+                                    
+        
+                            </div>
+                        </div>
+                        <p *ngIf="errores.password" class="text-sm ms-1 text-red-500 py-1">{{this.errores.password}}</p>
+        
+                    </div>
+
+                    <div class="basis-1/2">
+                        <div class="flex justify-center items-center relative">
+                            <input name="password-confirmation" [type]="confirPassword ? 'text' : 'password'" [(ngModel)]="inforUser.password_confirmation"
+                            required [ngClass]="{'border-red-500' : errores.password_confirmation}" class="w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit" >
+        
+                            <span [ngClass]="{'text-red-500' : errores.password_confirmation}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
+                                Confirmar Contraseña
+                            </span>
+        
+                            <!-- ojo abierto -->
+                            <div class="flex items-center absolute inset-y-0 right-5 mr-3 text-sm leading-5 cursor-pointer">
+        
+                                <svg *ngIf="confirPasswordSVG" (click)="inputPassConfir()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor" class="absolute size-6 text-slate-600 hover:scale-105 hover:text-slate-800">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                </svg>
+        
+                                <!-- ojo cerrado -->
+                                <svg *ngIf="!confirPasswordSVG" xmlns="http://www.w3.org/2000/svg" (click)="inputPassConfir()"  fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="absolute size-6 text-slate-600 hover:scale-105 hover:text-slate-800">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
+                                </svg>
+                                    
+        
+                            </div>
+                        </div>
+                        <p *ngIf="errores.password_confirmation" class="text-sm ms-1 text-red-500 py-1">{{this.errores.password_confirmation}}</p>
+        
+                    </div>                       
+
+                </div>
+
+                <div class="t-2 flex gap-4">
+                    <button [disabled]="!loading" (click)="cancelar()" [ngClass]="{'opacity-60 cursor-not-allowed' : !loading}" class="basis-1/2 bg-red-600 hover:bg-red-700 border rounded-lg text-gray-100 font-semibold cursor-pointer transition ease-in duration-500 tracking-wide"> Cancelar </button>
+
+                    <button [disabled]="!loading" (click)="actualizarUser()" [ngClass]="{'opacity-60 cursor-not-allowed' : !loading}" type="submit" class="w-full flex justify-center dark:bg-purple-800 dark:hover:bg-purple-700 text-gray-100 p-3 rounded-lg tracking-wide font-semibold cursor-pointer transition ease-in duration-500 bg-sky-600 hover:bg-sky-700">
+                        <svg *ngIf="!loading" class="animate-spin w-5 h-5 mr-3 fill-[#ffffff]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z"></path>
+                        </svg>
+                        {{statusBtn}}
+                    </button>
+
+                </div>
+                
+            </div>
+        </form>
+
+    </p-dialog>
+
+    <!-- PRODUCTOS -->
+    <p-dialog *ngIf="visibleProduct" header="Actualizar datos del Usuario" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }">
+
+        <form class="w-full mx-auto">
+
+            <div class="space-y-4">
+
+                <div class="lg:flex lg:flex-row gap-4 md:grid-row md:space-y-4">
+
+                    <div class="basis-1/3 md:mt-4">
+                        <div class="flex justify-center items-center relative">
+                            <input name="name"
+                                required [ngClass]="{'border-red-500': errores_product.name}" class="w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                                type="text" [(ngModel)]="inforProduct.name">
+                            <span [ngClass]="{'text-red-500': errores_product.name}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
+                                Nombre
+                            </span>
+                        </div>
+                        <p *ngIf="errores_product.name" class="text-sm ms-1 text-red-500 py-2">{{this.errores_product.name}}</p>
+                    </div>
+
+                    <div class="basis-1/3">
+                        <div class="flex justify-center items-center relative">
+                            <select [(ngModel)]="inforProduct.estado" [ngClass]="{'border-red-500': errores_product.estado}" name="estado" id="" class="w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit">
+                                <option value="" disabled selected hidden>Seleccionar disponibilidad</option>
+                                <option value="Disponible">Disponible</option>
+                                <option value="No disponible">No Disponible</option>
+
+                            </select>
+                            <span [ngClass]="{'text-red-500': errores_product.estado}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
+                                Disponibilidad
+                            </span>
+                        </div>
+                        <p *ngIf="errores_product.estado" class="text-sm ms-1 text-red-500 py-2">{{this.errores_product.estado}}</p>
+                    </div>
+
+                    <div class="basis-1/3">
+                        <div class="flex justify-center items-center relative">
+                            
+                            <input name="price"
+                                required [ngClass]="{'border-red-500': errores_product.price}" class=" w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                                type="text" [(ngModel)]="inforProduct.price">
+                            <span [ngClass]="{'text-red-500': errores_product.price}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
+                                Precio
+                            </span>
+                        </div>
+                        <p *ngIf="errores_product.price" class="text-sm ms-1 text-red-500 py-2">{{this.errores_product.price}}</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-row gap-4">
+
+                    <div class="basis-1/3">
+                        <div class="flex justify-center items-center relative">
+                                <input name="marca"
+                                    required [ngClass]="{'border-red-500': errores_product.marca}" class="w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                                    type="text" [(ngModel)]="inforProduct.marca">
+                                <span [ngClass]="{'text-red-500': errores_product.marca}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
+                                    Marca
+                                </span>
+                        </div>
+                        <p *ngIf="errores_product.marca" class="text-sm ms-1 text-red-500 py-2">{{this.errores_product.marca}}</p>
+                    </div>
+
+                    <div class="basis-1/3">
+                        <div class="flex justify-center items-center relative">
+                            <input name="tipo"
+                                required [ngClass]="{'border-red-500': errores_product.tipo}" class="w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                                type="text" [(ngModel)]="inforProduct.tipo">
+                            <span [ngClass]="{'text-red-500': errores_product.tipo}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
+                                Tipo
+                            </span>
+                        </div>
+                        <p *ngIf="errores_product.tipo" class="text-sm ms-1 text-red-500 py-2">{{this.errores_product.tipo}}</p>
+                    </div>                        
+
+                    <div class="basis-1/3">
+                        <div class="flex justify-center items-center relative">
+                            
+                            <input name="model"
+                                required [ngClass]="{'border-red-500': errores_product.model}" class=" w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                                type="text" [(ngModel)]="inforProduct.model">
+                            <span [ngClass]="{'text-red-500': errores_product.model}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
+                                Modelo
+                            </span>
+                        </div>
+                        <p *ngIf="errores_product.model" class="text-sm ms-1 text-red-500 py-2">{{this.errores_product.model}}</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-row gap-4">
+
+                    <div class="basis-1/5">
+                        <div class="flex justify-center items-center relative">
+                            <input name="stock"
+                                required [ngClass]="{'border-red-500': errores_product.stock}" class="w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                                type="text" [(ngModel)]="inforProduct.stock">
+                            <span [ngClass]="{'text-red-500': errores_product.stock}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
+                                Stock
+                            </span>
+                        </div>
+                        <p *ngIf="errores_product.stock" class="text-sm ms-1 text-red-500 py-2">{{this.errores_product.stock}}</p>
+                    </div>
+
+                    <div class="basis-1/5">
+                        <div class="flex justify-center items-center relative">
+                            <input name="amperaje"
+                                required [ngClass]="{'border-red-500': errores_product.amperaje}" class="w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                                type="text" [(ngModel)]="inforProduct.amperaje">
+                            <span [ngClass]="{'text-red-500': errores_product.amperaje}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
+                                Amperaje
+                            </span>
+                        </div>
+                        <p *ngIf="errores_product.amperaje" class="text-sm ms-1 text-red-500 py-2">{{this.errores_product.amperaje}}</p>
+                    </div>                        
+                    
+                    <div class="basis-1/5">
+                        <div class="flex justify-center items-center relative">
+                            <input name="voltaje"
+                                required [ngClass]="{'border-red-500': errores_product.voltaje}" class="w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                                type="text" [(ngModel)]="inforProduct.voltaje">
+                            <span [ngClass]="{'text-red-500': errores_product.voltaje}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
+                                Voltaje
+                            </span>
+                        </div>
+                        <p *ngIf="errores_product.voltaje" class="text-sm ms-1 text-red-500 py-2">{{this.errores_product.voltaje}}</p>
+                    </div>                        
+
+                    <div class="basis-2/5">
+                        <div class="flex justify-center items-center relative">
+                            
+                            <input name="proveedor"
+                                required [ngClass]="{'border-red-500': errores_product.proveedor}" class=" w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                                type="text" [(ngModel)]="inforProduct.proveedor">
+                            <span [ngClass]="{'text-red-500': errores_product.proveedor}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
+                                Proveedor
+                            </span>
+                        </div>
+                        <p *ngIf="errores_product.proveedor" class="text-sm ms-1 text-red-500 py-2">{{this.errores_product.proveedor}}</p>
+                    </div>
+                </div>
+
+                <div class="">
+                    
+                    <div class="flex justify-center items-center relative">
+                        <textarea name="descripcion" (input)="verificarLongitud()" [ngClass]="{'border-red-500': errores_product.descripcion}" type="text" [(ngModel)]="inforProduct.descripcion"
+                        required class="w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit " > </textarea>
+                        
+                        <span [ngClass]="{'text-red-500': errores_product.descripcion, 'peer-valid:text-xs peer-valid:-translate-y-5': peer_valid}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white ">
+                            Descripción
+                        </span>
+
+                        
+                    </div>
+                    <p *ngIf="errores_product.descripcion" class="text-sm ms-1 text-red-500 py-2">{{this.errores_product.descripcion}}</p>
+                </div>
+
+            
+                <div class="col-span-full max-w-5xl">
+                    <div class="grid grid-cols-4 gap-2">
+                        <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900">Imagen del Producto</label>
+                        <label for="name-phote" class="col-span-2 text-sm leading-6 text-sky-400 underline decoration-sky-500/35 dark:text-purple-400 dark:decoration-purple-500/35 transition duration-500 ease-in uppercase ">{{inforIMG.name}}</label>
+                        <label [ngClass]="{'opacity-60 cursor-not-allowed' : !loading}"  *ngIf="!visibleINPUT" for="file-upload" class="col-end-7 text-sm leading-6 relative cursor-pointer rounded-md bg-white font-semibold text-sky-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-sky-600 focus-within:ring-offset-2 hover:text-sky-500">
+                            <span>Cambiar imagen</span>
+                            <input [disabled]="!loading" (change)="uploadImage($event)" id="file-upload" name="img" type="file" class="sr-only" accept=".jpg, .png, .jpeg">
+                        </label>
+                    </div>
+                    <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                        <div *ngIf="visibleINPUT" class="text-center">
+                            <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
+                            </svg>
+                            <div class="mt-4 flex text-sm leading-6 text-gray-600">
+                                <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+                                    <span>Upload a file</span>
+                                    <input (change)="uploadImage($event)" id="file-upload" name="img" type="file" class="sr-only" accept=".jpg, .png, .jpeg">
+                                </label>
+                                <p class="pl-1">or drag and drop</p>
+                            </div>
+                            <p class="text-xs leading-5 text-gray-600">PNG, JPG, JPEG up to 10MB</p>
+                        </div>
+
+                        <div *ngIf="!visibleINPUT" class="bg-cover bg-center max-w-sm h-48 overflow-hidden rounded-lg shadow-xl">
+                            <img class="w-full h-full object-cover" [src]="selectimg" alt="">
+                        </div>
+                        
+                    </div>
+                    <p *ngIf="errores_product.img" class="text-sm ms-1 text-red-500 py-2">{{this.errores_product.img}}</p>
+
+                </div>
+            
+
+                <div class="t-2 flex gap-4">
+                    <button [disabled]="!loading" (click)="cancelar()" [ngClass]="{'opacity-60 cursor-not-allowed' : !loading}" class="basis-1/2 bg-red-600 hover:bg-red-700 border rounded-lg text-gray-100 font-semibold cursor-pointer transition ease-in duration-500 tracking-wide"> Cancelar </button>
+
+                    <button [disabled]="!loading" (click)="actualizarProducto()" [ngClass]="{'opacity-60 cursor-not-allowed' : !loading}" type="submit" class="w-full flex justify-center dark:bg-purple-800 dark:hover:bg-purple-700 text-gray-100 p-3 rounded-lg tracking-wide font-semibold cursor-pointer transition ease-in duration-500 bg-sky-600 hover:bg-sky-700">
+                        <svg *ngIf="!loading" class="animate-spin w-5 h-5 mr-3 fill-[#ffffff]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z"></path>
+                        </svg>
+                        {{statusBtn}}
+                    </button>
+                </div>
+                
+            </div>
+        </form>
+
+    </p-dialog>
+
+    <p-dialog *ngIf="visibleService" header="Actualizar datos del Servicio" [modal]="true" [(visible)]="visible" [style]="{ width: '40rem' }">
+        <app-services-edit (servicioUpdate)="getServices()"></app-services-edit>
+    </p-dialog>
+
 </div>

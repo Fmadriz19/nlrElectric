@@ -66,5 +66,11 @@ export class ViewproductsComponent implements OnInit{
     this.id_product = this.cookie.get('id_producto_seleccionado');
   }
 
+  formatPriceVES(price: string): string{
+    return new Intl.NumberFormat('es-VE', {style: 'currency', currency: 'VES'}).format(Number(price));
+  }
 
+  formatPriceUS(price: number): string{
+    return new Intl.NumberFormat('es-UD', {style: 'currency', currency: 'USD'}).format(Number(price));
+  }
 }

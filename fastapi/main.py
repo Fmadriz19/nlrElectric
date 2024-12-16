@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.models.prueba import main
+from pydantic import BaseModel # type: ignore
 
 # Cors
 from fastapi.middleware.cors import CORSMiddleware # type: ignore
@@ -14,14 +15,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+class SearchProduct(BaseModel):
+    message: str
+
 @app.get("/view")
 async def visualizar():
-    #return condition()
+
     resultados = 'conexion exitosa'
     return {"results": resultados}
 
 @app.post("/productos")
 async def products(request: str):
-    #return condition()
+
     resultados = main(request)
     return {"results": resultados}

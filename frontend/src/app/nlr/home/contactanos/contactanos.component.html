@@ -1,0 +1,127 @@
+    <div
+    class="bg-blue-800 dark:bg-purple-900 absolute top-0 left-0 bg-gradient-to-b from-blue-700 dark:from-gray-900 via-blue-500 dark:via-gray-900 to-blue-600 dark:to-purple-800 bottom-0 leading-5 h-full w-full overflow-hidden transition ease-in duration-500">
+
+</div>
+<div class="relative min-h-screen sm:flex sm:flex-row justify-center bg-transparent rounded-3xl shadow-xl">
+    <p-toast position="bottom-left" />
+    <div class="flex justify-center self-center z-10 mt-20">
+        <div class="p-12 bg-gray-50 mx-auto rounded-3xl min-w-96 shadow-lg">
+            <div class="mb-4">
+                <h3 class="font-semibold text-2xl text-gray-800">Dejanos tu opinión </h3>
+            </div>
+            
+            <p-toast position="bottom-left" />
+            <form class="w-full mx-auto" (ngSubmit)="enviar()">
+                
+                <div class="space-y-4 text-sm">
+            
+                    <div class="lg:flex lg:flex-row gap-4 md:grid-row ">
+            
+                        <div class="basis-1/2 max-w-60">
+                            <div class="flex justify-center items-center relative">
+                                <input name="name"
+                                    required [ngClass]="{'border-red-500': errores.name, 'border-green-600': inputName}" class="w-full text-sm text-gray-900 px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                                    type="text" 
+                                    [(ngModel)]="inforService.name"
+                                    (blur)="focusName()">
+                                    <span [ngClass]="{'text-red-500': errores.name, 'text-green-600': inputName}" class="text-sm text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-gray-50 peer-valid:text-xs peer-valid:-translate-y-5">
+                                        Nombre
+                                    </span>
+                            </div>
+                            
+                            <p *ngIf="errores.name" class="text-sm ms-1 text-red-500 pt-2">{{this.errores.name}}</p>
+                        </div>
+            
+                        <div class="basis-1/2 max-w-60">
+                            <div class="flex justify-center items-center relative">
+            
+                                    <input name="telefono"
+                                    required [ngClass]="{'border-red-500': errores.telefono, 'border-green-600': inputTelefono}" class="w-full text-sm text-gray-900 px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                                    type="text" 
+                                    [(ngModel)]="inforService.telefono" 
+                                    (keypress)="validationTelefono($event)" 
+                                    (blur)="focusTelefono()">
+                                        <span [ngClass]="{'text-red-500': errores.telefono, 'text-green-600': inputTelefono}" class="text-sm text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-gray-50 peer-valid:text-xs peer-valid:-translate-y-5">
+                                            Teléfono
+                                        </span>
+                            </div>
+                            <p *ngIf="errores.telefono" class="text-sm ms-1 text-red-500 pt-2">{{this.errores.telefono}}</p>
+                        </div>
+                    </div>
+            
+                    <div class="lg:flex lg:flex-row gap-4 md:grid-row">
+            
+                        <div class="basis-1/2 max-w-60">
+                            <div class="flex justify-center items-center relative">
+                                <input name="email"
+                                    required [ngClass]="{'border-red-500': errores.email, 'border-green-600': inputEmail}" class="w-full text-sm text-gray-900 px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                                    type="email" 
+                                    [(ngModel)]="inforService.email"
+                                    (blur)="focusEmail()">
+                                    <span [ngClass]="{'text-red-500': errores.email, 'text-green-600': inputEmail}" class="text-sm text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-gray-50 peer-valid:text-xs peer-valid:-translate-y-5">
+                                        Correo electrónico
+                                    </span>
+                            </div>
+                            
+                            <p *ngIf="errores.email" class="text-sm ms-1 text-red-500 pt-2">{{this.errores.email}}</p>
+                        </div>
+            
+                        <div class="basis-1/2 max-w-60">
+                            <div class="flex justify-center items-center relative">
+            
+                                    <input name="asunto"
+                                    required [ngClass]="{'border-red-500': errores.asunto, 'border-green-600': inputAsunto}" class="w-full text-sm text-gray-900 px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                                    type="text" 
+                                    [(ngModel)]="inforService.asunto" 
+                                    (blur)="focusAsunto()">
+                                        <span [ngClass]="{'text-red-500': errores.asunto, 'text-green-600': inputAsunto}" class="text-sm text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-gray-50 peer-valid:text-xs peer-valid:-translate-y-5">
+                                            Asunto
+                                        </span>
+                            </div>
+                            <p *ngIf="errores.asunto" class="text-sm ms-1 text-red-500 pt-2">{{this.errores.asunto}}</p>
+                        </div>
+                    </div>
+            
+                    <div class="">
+            
+                        <div class="flex justify-center items-center relative">
+            
+                            <textarea name="descripcion" 
+                            (blur)="verificarLongitud()" 
+                            [ngClass]="{'border-red-500': errores.descripcion, 'border-green-600': inputDescripcion}" type="text" 
+                            [(ngModel)]="inforService.descripcion"
+                            required class="w-full text-sm px-4 py-3 bg-gray-200 border text-gray-900 border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit " > </textarea>
+                            
+                            <span [ngClass]="{'text-red-500': errores.descripcion, 'peer-valid:text-xs peer-valid:-translate-y-5 text-green-600': inputDescripcion}" class="text-sm text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-gray-50 ">
+                                Mensaje
+                            </span>
+            
+                            
+                        </div>
+                        <p *ngIf="errores.descripcion" class="text-sm ms-1 text-red-500 pt-2">{{this.errores.descripcion}}</p>
+            
+                    </div>
+            
+                    <div class="mt-2 flex gap-4">
+                        <button [disabled]="validado" (click)="enviar()" [ngClass]="{'opacity-60 cursor-not-allowed' : validado}" type="submit" class="w-full flex justify-center dark:bg-purple-800 dark:hover:bg-purple-700 text-gray-100 p-3 rounded-lg tracking-wide font-semibold transition ease-in duration-500 bg-sky-600 hover:bg-sky-700">
+                            <svg *ngIf="!loading" class="animate-spin w-5 h-5 mr-3 fill-[#ffffff]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z"></path>
+                            </svg>
+                            {{statusBtn}}
+                        </button>
+            
+                    </div>
+                    
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<svg class="absolute bottom-0 left-0 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+    <path fill="#fff" fill-opacity="1"
+        d="M0,0L40,42.7C80,85,160,171,240,197.3C320,224,400,192,480,154.7C560,117,640,75,720,74.7C800,75,880,117,960,154.7C1040,192,1120,224,1200,213.3C1280,203,1360,149,1400,122.7L1440,96L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z">
+    </path>
+</svg>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js"></script>

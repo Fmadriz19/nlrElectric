@@ -96,3 +96,94 @@ export interface ApiResponse {
 export interface searchProduct{
     message:string;
 }
+
+export interface explorarProducts{
+    title: string;
+    price: string;
+    type: string;
+    image: string;
+    url: string;
+}
+
+export interface ServiciosGeneral{
+    id: number;
+    name: string;
+    descripcion: string;
+    ejecucion: string;
+    img: string;
+    showFullDescription: boolean;
+}
+
+export interface searchService{
+    id: number
+}
+
+export interface Servicios {
+    name: string;
+    descripcion: string;
+    ejecucion: string;
+    img: string;
+}
+
+export interface addToProduct {
+    id: string,
+    name: string,
+    img: string,
+    price: string
+}
+
+export interface tipoFactura {
+    name: string;
+    code: string;
+}
+
+export interface userFactura{
+    id: number;
+    name: string;
+    user: string;
+    email: string;
+}
+
+export interface productoFactura{
+    id: number;
+    name: string;
+    estado: string;
+    price: number;
+    stock: number;
+    img: string;
+    descripcion: string;
+    marca: string;
+    proveedor: string;
+    tipo: string;
+    model: string;
+    amperaje: string;
+    voltaje: string;
+    code_sku: boolean;
+}
+
+export interface Producto {
+    id: number;
+    name: string;
+    price: number;
+    quantity: number;
+}
+  
+export interface Factura_Producto {
+    nombre: string;
+    email: string;
+    empresa: string;
+    verificar: string;
+    usuario_id: number;
+    productos: Producto[];
+    informacion_servicio: Servicio_Producto[];
+    estado: string;
+    fecha_compra: string;
+    iva: string;
+    total: string;
+}
+
+export interface Servicio_Producto {
+    informe: string;
+    fecha_servicio: string;
+    horas_servicio: string;
+}

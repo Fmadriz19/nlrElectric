@@ -1,0 +1,303 @@
+
+<div class="relative sm:flex sm:flex-row justify-center bg-transparent">
+    <p-toast position="bottom-left" />
+
+
+    <div class="w-auto justify-center self-center z-10">
+        <div class="p-12 bg-white mx-auto rounded-3xl shadow-lg ">
+            <form class="w-full mx-auto">
+                
+                <div class="space-y-4 text-sm">
+
+                    <div class="min-w-1/2">
+                        
+
+                            <p-dropdown name="tipofactura"
+                                [options]="facturas_tipo" 
+                                [(ngModel)]="selectFactura" 
+                                (onChange)="onChangeFactura($event)"
+                                optionLabel="name"
+                                placeholder="Seleccionar tipo de Factura"
+                                [style]="{width: '18rem'}" />
+                        
+
+                    </div>
+
+                    <div class="">
+                        <h2>Datos del Usuario</h2>
+                    </div>
+
+                    <div class="flex flex-row gap-2 pt-2">
+                        <div class="basis-1/4">
+                            <p-floatLabel>
+
+                                <p-autoComplete 
+                                    [(ngModel)]="select_user"
+                                    [suggestions]="autocomplate_user"
+                                    (completeMethod)="searchUser($event)"
+                                    (onSelect)="onUserSelected($event)" 
+                                    inputId="float-label" />
+                                    <label for="float-label">Usuario</label>
+                            </p-floatLabel>
+                        </div>
+
+                        <div class="basis-1/4">
+                            <p-floatLabel>
+                                <input pInputText id="username" 
+                                [(ngModel)]="factura_General.name_user" 
+                                name="nombre" />
+                                <label for="username">Nombre</label>
+                            </p-floatLabel>
+                        </div>
+
+                        <div class="basis-1/4">
+                            <p-floatLabel>
+                                <input pInputText id="email" 
+                                [(ngModel)]="factura_General.email" 
+                                name="email" />
+                                <label for="email">Correo Electrónico</label>
+                            </p-floatLabel>
+                        </div>
+
+                        <div class="basis-1/4">
+
+                            <p-floatLabel>
+                                <p-dropdown 
+                                    [options]="personal_juridico"
+                                    [(ngModel)]="select_personal_juridico"
+                                    optionLabel="name" 
+                                    (onChange)="onChangeEmpresa($event)"
+                                    inputId="float-label" />
+                                <label for="float-label">Personal o juridico</label>
+                            </p-floatLabel>
+                        </div>
+
+                    </div>
+
+                    <div class="pb-2">
+                        <h2>Datos de los productos</h2>
+                    </div>
+                    
+                    <!-- <div class="flex gap-2 pt-2">
+                        
+                        <div class="basis-1/4">
+                            <p-floatLabel>
+                                <p-autoComplete 
+                                    [(ngModel)]="select_product"
+                                    [suggestions]="autocomplate_product"
+                                    (completeMethod)="searchProduct($event)"
+                                    (onSelect)="onProductSelected($event)" 
+                                    inputId="float-label" />
+                                    <label for="float-label">Producto</label>
+                            </p-floatLabel>
+                        </div>
+
+                        <div class="basis-1/4">
+                            <p-floatLabel>
+                                <input pInputText id="username" 
+                                [(ngModel)]="factura_General.name_user" 
+                                name="price" />
+                                <label for="username">Precio</label>
+                            </p-floatLabel>
+                        </div>
+
+                        <div class="basis-1/4">
+                            <p-floatLabel>
+                                <input pInputText id="username" 
+                                [(ngModel)]="factura_General.name_user" 
+                                name="cantidad" />
+                                <label for="username">Cantidad</label>
+                            </p-floatLabel>
+                        </div>
+                          
+                    </div> -->
+
+                    <!-- PRODUCTOS DE LA FACTURA -->
+                    <div *ngIf="campos_factura" class="">
+
+                        <div *ngFor="let row of rows; let i = index" class="flex gap-2 pb-6">
+                            <!-- Producto -->
+                            <div class="basis-1/4">
+                              <p-floatLabel>
+                                <p-autoComplete
+                                  [(ngModel)]="row.product"
+                                  [suggestions]="autocomplate_product"
+                                  (completeMethod)="searchProduct($event, i)"
+                                  (onSelect)="onProductSelected($event, i)"
+                                  inputId="product-{{ i }}"
+                                  field="name"
+                                ></p-autoComplete>
+                                <label for="product-{{ i }}">Producto</label>
+                              </p-floatLabel>
+                            </div>
+                          
+                            <!-- Precio -->
+                            <div class="basis-1/4">
+                                <p-floatLabel>
+                                <input 
+                                    pInputText 
+                                    id="price-{{ i }}" 
+                                    [(ngModel)]="row.price" 
+                                    [name]="'price-' + i"
+                                    disabled
+                                    [style]="{width: '10rem'}"
+                                />
+                                <label for="price-{{ i }}">Precio</label>
+                                </p-floatLabel>
+                            </div>
+                          
+                            <!-- Cantidad -->
+                            <div class="basis-1/4">
+                              <p-floatLabel>
+                                <input 
+                                  pInputText 
+                                  id="quantity-{{ i }}" 
+                                  [(ngModel)]="row.quantity" 
+                                  [name]="'quantity-' + i" 
+                                  type="number"
+                                  min="1"
+                                  (input)="calculateTotal(row.price, row.quantity, i)"
+                                  [style]="{width: '10rem'}"
+                                />
+                                <label for="quantity-{{ i }}">Cantidad</label>
+                              </p-floatLabel>
+                            </div>
+
+                            <!-- Precio total del producto -->
+                            <div class="basis-1/4">
+                                <p-floatLabel>
+                                  <input 
+                                    pInputText 
+                                    id="total-{{ i }}" 
+                                    [(ngModel)]="row.total" 
+                                    [name]="'total-' + i" 
+                                    disabled
+                                    [style]="{width: '10rem'}"
+                                  />
+                                  <label for="total-{{ i }}">Total</label>
+                                </p-floatLabel>
+                              </div>
+                          
+                            <!-- Botón para eliminar fila -->
+                            <div class="basis-1/4">
+                              <button 
+                                class="bg-red-500 text-white px-4 py-2 rounded" 
+                                (click)="removeRow(i)"
+                              >
+                                Eliminar
+                              </button>
+                            </div>
+                          </div>
+                          
+                        <!-- Botón para añadir fila -->
+                        <div class="flex gap-2 align-items-center justify-between pt-2">
+                            
+                            <div class="flex-initial">
+                                <button type="button"
+                                class="bg-blue-500 text-white px-4 py-2 rounded" 
+                                (click)="addRow()"
+                                >
+                                Añadir Producto
+                            </button>
+                            </div>
+
+                            <div class="flex-1 justify-center w-80">
+                                <p-dropdown name="estado_factura"
+                                    [options]="estado_factura" 
+                                    [(ngModel)]="selectFactura_estado" 
+                                    (onChange)="onChangeFacturaEstado($event)"
+                                    optionLabel="name"
+                                    placeholder="Seleccionar estado del producto"
+                                    [style]="{width: '20rem'}"/>
+                            </div>
+
+                            <div class="flex-auto text-right">
+                                <div class="flex gap-4 items-center">
+                                    <h2 class=" text-gray-600 font-bold">Fecha de Registro: </h2>
+                                    <p class=" text-gray-600"> {{productos_registrar.fecha_compra}} </p>
+
+                                </div>
+                            </div>
+                        </div>
+                          
+
+                    </div>
+
+                    <div class="w-full">
+
+                        <tr class="flex align-items-center justify-between">
+
+                            <td class="flex-1">
+                                <h2 class="text-gray-600 font-semibold">Detalles de la Factura</h2>
+                            </td>
+                            <td class="flex-1 text-right">
+                                <h2 class="text-gray-600 font-semibold items-center">Precio en Bs.S</h2>
+                            </td>
+                            <td class="flex-1 text-right">
+                                <h2 class="text-gray-600 font-semibold items-center">Precio en REF</h2>
+                            </td>
+
+                        </tr>
+
+                        <tr class="flex align-items-center justify-between">
+
+                            <td class="flex-1">
+                                <h2 class="text-gray-500"> Base imponible: </h2>
+                            </td>
+                            <td class="flex-1 text-right">
+                                <p class="items-center text-gray-500"> {{formatPriceVES(total_sin_iva_VES)}} </p>
+                            </td>
+                            <td class="flex-1 text-right">
+                                <p class="ml-auto items-center text-gray-500"> {{formatPriceUS(total_sin_iva_dolares)}} </p>
+                            </td>
+
+                        </tr>
+
+                        <tr class="flex align-items-center justify-between">
+
+                            <td class="flex-1">
+                                <h2 class="text-gray-500"> IVA: </h2>
+                            </td>
+                            <td class="flex-1 text-right">
+                                <p class="items-center text-gray-500"> {{formatPriceVES(total_iva_VES)}} </p>
+                            </td>
+                            <td class="flex-1 text-right">
+                                <p class="ml-auto items-center text-gray-500"> {{formatPriceUS(total_iva_dolares)}} </p>
+                            </td>
+
+                        </tr>
+
+                        <tr class="flex align-items-center justify-between">
+
+                            <td class="flex-1">
+                                <h2 class="text-gray-500"> Precio Total</h2>
+                            </td>
+                            <td class="flex-1 text-right">
+                                <p class="items-center text-gray-500"> {{formatPriceVES(pricebcv)}} </p>
+                            </td>
+                            <td class="flex-1 text-right">
+                                <p class="ml-auto items-center text-gray-500"> {{formatPriceUS(precioTotalFactura)}} </p>
+                            </td>
+
+                        </tr>
+
+                    </div>
+                      
+
+                    <div class="t-2 flex gap-4">
+                        <button [disabled]="validado" (click)="registre()" [ngClass]="{'opacity-60 cursor-not-allowed' : validado}" type="submit" class="w-full flex justify-center dark:bg-purple-800 dark:hover:bg-purple-700 text-gray-100 p-3 rounded-lg tracking-wide font-semibold transition ease-in duration-500 bg-sky-600 hover:bg-sky-700">
+                            <svg *ngIf="!loading" class="animate-spin w-5 h-5 mr-3 fill-[#ffffff]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z"></path>
+                            </svg>
+                            {{statusBtn}}
+                        </button>
+
+                    </div>
+
+                    
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+

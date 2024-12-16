@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NlrservicesService } from '../../../services/nlrservices.service';
-import { Marcas, ProductsGeneral, searchUser } from '../../interfaces/registros';
+import { addToProduct, Marcas, ProductsGeneral, searchUser } from '../../interfaces/registros';
 import { FormsModule } from '@angular/forms';
 import { NgFor } from '@angular/common';
 import { SearchPipe } from './search.pipe';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { CartShopService } from '../../../services/cart-shop.service';
 
 @Component({
   selector: 'app-store-product',
@@ -22,21 +23,24 @@ export class StoreProductComponent implements OnInit{
   marcasProducts: Marcas[] = [];
   searchText: string = '';
   valor: string = '';
+  id_personal: string = '';
   // Variables booleanas
 
-  constructor(private nlrservices: NlrservicesService, private cookie: CookieService, private router: Router){
+  constructor(private nlrservices: NlrservicesService, private cookie: CookieService, private router: Router, private carrito: CartShopService ){
     this.getProducts();
   }
 
   ngOnInit(): void {
     console.log(this.valor);
+
+    this.id_personal = this.cookie.get('id_personal');
     
   }
 
   /*  Extrayendo todos los productos  */
 
   getProducts(){
-    this.nlrservices.indexProducts(this.generalProducts as unknown as ProductsGeneral).subscribe({
+    this.nlrservices.indexProducts().subscribe({
       next: (res) =>{
         this.generalProducts = res;
         this.listadoMarca();
@@ -76,4 +80,14 @@ export class StoreProductComponent implements OnInit{
     this.router.navigateByUrl('products/view');
   }
 
+  addCart(product: addToProduct){
+    const addProduct = {
+      id: product.id,
+      name: product.name,
+      img: product.img,
+      price: product.price
+    }
+    this.carrito.addToCart(addProduct, this.id_personal);
+    
+  }
 }

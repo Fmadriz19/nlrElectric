@@ -9,6 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 import time
 import random as rdm
+from urllib.parse import urljoin
 
 def main(message: str):
     service = Service(ChromeDriverManager().install())
@@ -17,7 +18,8 @@ def main(message: str):
     options.add_argument("--disable-extensions")
     options.add_argument("--window-size=1920,1080")
     driver = Chrome(service=service, options=options)
-
+    base_url = "https://automatroni.com/productos/"
+    
     driver.get("https://automatroni.com/productos")
     time.sleep(rdm.uniform(2, 5))
 
@@ -43,11 +45,17 @@ def main(message: str):
         eti_ul = div.find_element(By.TAG_NAME, "ul")
         eti_lis = eti_ul.find_elements(By.TAG_NAME, "li")
         name_type = eti_lis[2]
-
+        eti_img = div.find_element(By.TAG_NAME, "img")
+        img_src = urljoin(base_url, eti_img.get_attribute("src"))
+        eti_a = eti_lis[3].find_element(By.TAG_NAME, "a")
+        url = urljoin('https://automatroni.com/', eti_a.get_attribute("href"))
+        
         resultados.append({
             "title": name_title.text,
             "price": price.text,
-            "type": name_type.text
+            "type": name_type.text,
+            "image": img_src,
+            "url": url
         })
 
     driver.quit()

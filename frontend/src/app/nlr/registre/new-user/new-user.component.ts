@@ -1,5 +1,5 @@
 import { NgClass, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
@@ -21,6 +21,7 @@ import { Userregistro } from '../../interfaces/registros';
   providers: [MessageService]
 })
 export class NewUserComponent implements OnInit{
+  @Output() userRegistered = new EventEmitter<void>();
 
   inforUser = {
     name: '',
@@ -90,14 +91,6 @@ export class NewUserComponent implements OnInit{
     this.cookie.delete('url_anterior', '/registre')
   }
 
-  // redireccionar 
-  redireccionar(){
-    this.visible = !this.visible;
-    const url = this.cookie.get('url_anterior');
-    this.cookie.delete('url_anterior', '/registre')
-    this.router.navigateByUrl(url);
-  }
-
   // registrar producto
   registre(){
     console.log(this.inforUser);
@@ -109,7 +102,17 @@ export class NewUserComponent implements OnInit{
 
     this.servicenlr.resgistreUser(this.inforUser as Userregistro).subscribe({
       next: (res: any) => {
-        this.visible = !this.visible;
+        this.statusBtn = 'Registrar';
+        this.loading = !this.loading;
+        this.inforUser = {
+          name: '',
+          email: '',
+          password: '',
+          password_confirmation: '',
+          user: '',
+          rol: ''
+        }
+        this.userRegistered.emit();
       },
       error: (err: any) => {
         this.errores = err.error.errors;

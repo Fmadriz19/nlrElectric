@@ -32,9 +32,9 @@
                         {{product.descripcion}}
                     </p>
                     
-                    <div class="mt-4">
-                        <span class="text-2xl font-bold text-[#0ea5e9] dark:text-[#9333ea]">${{product.price}}</span>
-                        <span class="text-2xl font-bold text- dark:text-[#9333ea]">${{pricebcv}}</span>
+                    <div class="mt-4 flex gap-4">
+                        <span class="text-2xl font-bold text-sky-800 dark:text-[#9333ea]">{{ formatPriceUS(product.price)}}</span>
+                        <span class="text-2xl font-bold text-emerald-600 dark:text-[#9333ea] "> {{formatPriceVES(pricebcv)}}</span>
                     </div>
 
                     <div class="mt-4 flex items-center">

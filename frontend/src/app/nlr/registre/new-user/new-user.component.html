@@ -1,17 +1,12 @@
-<div
-    class="bg-sky-600 dark:bg-purple-900 absolute top-0 left-0 bg-gradient-to-b from-sky-700 dark:from-gray-900 via-sky-500 dark:via-gray-900 to-sky-600 dark:to-purple-800 bottom-0 leading-5 h-full w-full overflow-hidden transition ease-in duration-500">
 
-</div>
-<div class="relative min-h-screen sm:flex sm:flex-row justify-center bg-transparent rounded-3xl shadow-xl">
+<div class="relative sm:flex sm:flex-row justify-center bg-transparent">
     <p-toast position="bottom-left" />
 
 
-    <div class="w-auto justify-center self-center z-10 my-20">
+    <div class="w-auto justify-center self-center z-10">
         <div class="p-12 bg-white mx-auto rounded-3xl shadow-lg">
             <form class="w-full mx-auto">
-                <div class="mb-2 text-center">
-                    <h3 class="font-semibold text-2xl text-gray-800">Nuevo Usuario</h3>    
-                </div>
+                
                 <div class="space-y-4">
 
                     <div class="lg:flex lg:flex-row gap-4 md:grid-row md:space-y-4">
@@ -19,7 +14,7 @@
                         <div class="basis-1/2 md:mt-4">
                             <div class="flex justify-center items-center relative">
                                 <input name="name"
-                                    required [ngClass]="{'border-red-500': errores.name}" class="w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                                    required [ngClass]="{'border-red-500': errores.name}" class="w-full text-gray-800 text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
                                     type="text" [(ngModel)]="inforUser.name">
                                 <span [ngClass]="{'text-red-500': errores.name}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
                                     Nombre
@@ -31,7 +26,7 @@
 
                         <div class="basis-1/2">
                             <div class="flex justify-center items-center relative">
-                                <select [(ngModel)]="inforUser.rol" [ngClass]="{'border-red-500': errores.rol}" name="rol" id="" class="w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit">
+                                <select [(ngModel)]="inforUser.rol" [ngClass]="{'border-red-500': errores.rol}" name="rol" id="" class="w-full text-gray-800 text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit">
                                     <option value="">Seleccionar rol</option>
                                     <option value="admin">Administrador</option>
                                     <option value="compras">Compras</option>
@@ -51,7 +46,7 @@
                         <div class="basis-1/2">
                             <div class="flex justify-center items-center relative">
                                 <input name="email"
-                                    required [ngClass]="{'border-red-500': errores.email}" class="w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                                    required [ngClass]="{'border-red-500': errores.email}" class="w-full text-gray-800 text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
                                     type="email" [(ngModel)]="inforUser.email">
                                 <span [ngClass]="{'text-red-500': errores.email}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
                                     Correo Electronico
@@ -65,7 +60,7 @@
                             <div class="flex justify-center items-center relative">
                                 
                                 <input name="user"
-                                    required [ngClass]="{'border-red-500': errores.user}" class=" w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                                    required [ngClass]="{'border-red-500': errores.user}" class=" w-full text-gray-800 text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
                                     type="text" [(ngModel)]="inforUser.user">
                                 <span [ngClass]="{'text-red-500': errores.user}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
                                     Usuario
@@ -80,7 +75,7 @@
                         <div class="basis-1/2">
                             <div class="flex justify-center items-center relative">
                                 <input name="password" [type]="passwordPass ? 'text' : 'password'" [(ngModel)]="inforUser.password"
-                                required [ngClass]="{'border-red-500' : errores.password}" class="w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit" >
+                                required [ngClass]="{'border-red-500' : errores.password}" class="w-full text-sm px-4 py-3 text-gray-800 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit" >
             
                                 <span [ngClass]="{'text-red-500' : errores.password}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
                                     Contraseña
@@ -112,7 +107,7 @@
                         <div class="basis-1/2">
                             <div class="flex justify-center items-center relative">
                                 <input name="password-confirmation" [type]="confirPassword ? 'text' : 'password'" [(ngModel)]="inforUser.password_confirmation"
-                                required [ngClass]="{'border-red-500' : errores.password_confirmation}" class="w-full text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit" >
+                                required [ngClass]="{'border-red-500' : errores.password_confirmation}" class="w-full text-gray-800 text-sm px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit" >
             
                                 <span [ngClass]="{'text-red-500' : errores.password_confirmation}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
                                     Confirmar Contraseña
@@ -144,8 +139,6 @@
                     </div>
 
                     <div class="t-2 flex gap-4">
-                        <button [disabled]="!loading" (click)="cancelar()" [ngClass]="{'opacity-60 cursor-not-allowed' : !loading}" class="basis-1/2 bg-red-600 hover:bg-red-700 border rounded-lg text-gray-100 font-semibold cursor-pointer transition ease-in duration-500 tracking-wide"> Cancelar </button>
-
                         <button [disabled]="!loading" (click)="registre()" [ngClass]="{'opacity-60 cursor-not-allowed' : !loading}" type="submit" class="w-full flex justify-center dark:bg-purple-800 dark:hover:bg-purple-700 text-gray-100 p-3 rounded-lg tracking-wide font-semibold cursor-pointer transition ease-in duration-500 bg-sky-600 hover:bg-sky-700">
                             <svg *ngIf="!loading" class="animate-spin w-5 h-5 mr-3 fill-[#ffffff]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z"></path>
@@ -159,24 +152,4 @@
             </form>
         </div>
     </div>
-</div>
 
-
-<svg class="absolute bottom-0 left-0 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-    <path fill="#fff" fill-opacity="1"
-        d="M0,0L40,42.7C80,85,160,171,240,197.3C320,224,400,192,480,154.7C560,117,640,75,720,74.7C800,75,880,117,960,154.7C1040,192,1120,224,1200,213.3C1280,203,1360,149,1400,122.7L1440,96L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z">
-    </path>
-</svg>
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js"></script>
-
-<!-- Modal -->
-<div class="card flex justify-content-center">
-    <p-dialog header="Se ha registrado con Exito" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
-        <span class="text-slate-500 opacity-80 block mb-5 text-center">¿Deseas seguir registrando algun usuario?</span>
-        
-        <div class="flex justify-center items-center gap-2">
-            <p-button label="No" severity="danger" (onClick)="redireccionar()"  />
-            <p-button label="Si" severity="success" (onClick)="visible = false" />
-        </div>
-    </p-dialog>
-</div>

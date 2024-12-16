@@ -39,6 +39,8 @@
               <a href="" class="rounded-md px-3 py-2 text-sm font-medium text-gray-100 hover:bg-gray-700 hover:text-white">Inicio</a>
               <a href="products" class="rounded-md px-3 py-2 text-sm font-medium text-gray-100 hover:bg-gray-700 hover:text-white">Productos</a>
               <a href="services" class="rounded-md px-3 py-2 text-sm font-medium text-gray-100 hover:bg-gray-700 hover:text-white">Servicios</a>
+              <a href="contactanos" class="rounded-md px-3 py-2 text-sm font-medium text-gray-100 hover:bg-gray-700 hover:text-white">Contactanos</a>
+              <a href="sobre_nosotros" class="rounded-md px-3 py-2 text-sm font-medium text-gray-100 hover:bg-gray-700 hover:text-white">Sobre nosotros</a>
             </div>
           </div>
         </div>
@@ -65,7 +67,7 @@
 
           </button>
           
-          <button type="button" class="relative mr-2 rounded-full bg-blue-800 p-1 text-gray-200 hover:text-white hover:border-gray-200 hover:bg-gray-900 transition ease-in duration-500 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 dark:bg-gray-900
+          <button (click)="abrirDrawer()" type="button" class="relative mr-2 rounded-full bg-blue-800 p-1 text-gray-200 hover:text-white hover:border-gray-200 hover:bg-gray-900 transition ease-in duration-500 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 dark:bg-gray-900
           dark:hover:bg-blue-800 dark:text-amber-500 dark:hover:text-amber-600">
 
             <svg class="size-6 p-0.5" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg">
@@ -73,12 +75,23 @@
               <path fill="currentColor" d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
             
             </svg>
+
+
+            <p-badge 
+              *ngIf="notificaciones_cart > 0"
+              [value]="notificaciones_cart" 
+              class="absolute scale-75 top-0 right-0 transform translate-x-1.5 -translate-y-2"></p-badge>
           </button>
-  
+          
           <!-- Profile dropdown -->
           <div *ngIf="sessionAct" class="relative ml-3">
-            <div>
-              <button (click)="visibleMenuAvatar()" type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+            <div class="group">
+              <button 
+                (click)="visibleMenuAvatar()" 
+                type="button" 
+                class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" 
+                aria-expanded="false" 
+                aria-haspopup="true">
                 <span class="absolute -inset-1.5"></span>
                 <span class="sr-only">Open user menu</span>
                 
@@ -87,13 +100,24 @@
               </div>
 
               </button>
+
+              <!-- --- HACERLO RESPONSIVE --- -->
+              <div *ngIf="!avatarMenu" 
+              class="flex flex-col align-items-center group-hover:opacity-100 transition-opacity bg-gray-100 px-2 text-sm text-gray-800 rounded-md absolute left-1/5 -translate-x-1/2 translate-y-1/4 opacity-0 mx-auto p-2 border border-gray-800" >
+                  <span class=""> {{this.user.name}} </span>
+                  <span class=""> {{this.user.email}} </span>
+              </div>
+
             </div>
   
-            <div *ngIf="avatarMenu" class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+            <div 
+              *ngIf="avatarMenu" 
+              class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" 
+              role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
               <!-- Active: "bg-gray-100", Not Active: "" -->
-              <a (click)="visibleMenuAvatar()" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+              <a (click)="visibleMenuAvatar()" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Perfil</a>
               <a (click)="visibleMenuAvatar()" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-              <a (click)="cerrarSession()" class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:text-slate-200 hover:bg-sky-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+              <a (click)="cerrarSession()" class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:text-slate-200 hover:bg-sky-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Cerrar Sesión</a>
             </div>
           </div>
 
@@ -117,10 +141,103 @@
       <div class="space-y-1 px-2 pb-3 pt-2">
         
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Dashboard</a>
-        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Productos</a>
-        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Servicios</a>
-        <a *ngIf="permisos" href="list" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Listado</a>
+        <a href="" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Administrador</a>
+        <a *ngIf="permisos" href="list" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Administrador</a>
+        <a href="products" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Productos</a>
+        <a href="services" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Servicios</a>
+        <a href="contactanos" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contactanos</a>
+        <a href="sobre_nosotros" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Sobre nosotros</a>
       </div>
     </div>
   </nav>
+
+<!-- Overlay oscuro -->
+<div
+  class="fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 z-20"
+  *ngIf="drawerVisible"
+  (click)="abrirDrawer()">
+</div>
+
+<div
+  *ngIf="drawerVisible"
+  class="fixed top-0 right-0 flex flex-col h-full w-96 bg-white shadow-lg transform transition-transform duration-300 z-20"
+  [ngClass]="{'translate-x-0': drawerVisible, 'translate-x-full': !drawerVisible}">
+
+  <!-- HEADER -->
+  <div class="p-4 flex items-center sticky top-0 bg-slate-50 z-10 shadow-md">
+    <h2 class="text-lg font-bold text-gray-900">Carrito de Compras</h2>
+    <button class="bg-red-500 text-white px-2 py-1 rounded absolute right-0 mr-4" (click)="abrirDrawer()">
+      <i class="pi pi-times"></i>
+    </button>
+  </div>
+  
+  <!-- BODY -->
+  <div class="flex-grow overflow-y-auto px-2 py-1">
+  
+    @for (service of cartData; track $index) {
+
+        <div class="flex flex-col px-2 py-1">
+          <div class="items-center">
+
+            <div class="flex rounded-lg bg-slate-200 w-full h-24 p-2.5 gap-2">
+
+              <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center">
+                <img class="w-10 h-10 rounded-lg" [src]="service.img" alt="">
+              </div>
+
+              <div class="">
+                <div class="text-xs font-normal leading-5 text-gray-900">
+                  {{service.name}}
+                </div>
+
+                <div class="flex gap-2 text-xs font-normal leading-5 text-gray-900">
+                  <span class="pt-1">
+                    {{service.price}}
+                  </span>
+
+                  <div class="flex items-center gap-2">
+                    <!-- Botón para disminuir la cantidad -->
+                    <button class="bg-gray-300 text-gray-900 px-2 rounded pb-1" (click)="actualizarCantidad(service.id, -1)">
+                      <i class="pi pi-minus" style="font-size: 0.5rem;"></i>
+                    </button>
+                  
+                    <input 
+                      name="cantidad" 
+                      class="w-8 text-center text-sm text-gray-900 px-2 py-1 bg-gray-100 border border-gray-200 rounded"
+                      type="text" 
+                      [(ngModel)]="service.quantity" 
+                      (change)="actualizarCantidad(service.id, 0, service.quantity)"
+                      disabled="true">
+                    
+                    <!-- Botón para aumentar la cantidad -->
+                    <button class="bg-gray-300 text-gray-900 px-2 pb-1 rounded" (click)="actualizarCantidad(service.id, 1)">
+                      <i class="pi pi-plus" style="font-size: 0.5rem;"></i>
+                    </button>
+                  </div>
+
+                </div>
+                
+              </div>
+
+              <div class="ml-auto flex items-center">
+                <button (click)="eliminarCart(service.id)" class="text-white rounded-md p-2 bg-red-500">
+                  <i class="pi pi-trash" ></i>
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        }
+  </div>
+
+  <!-- FOOTER -->
+  <div class="p-4 flex items-center sticky bottom-0 bg-white z-10 shadow-md">
+    <h2 class="text-lg font-bold text-gray-900">Total: {{ calcularTotal() }}</h2>
+    <button class="ml-auto bg-blue-500 text-white px-4 py-2 rounded">
+      Pagar
+    </button>
+  </div>
+
+</div>

@@ -21,7 +21,6 @@ class ServiceController extends Controller
             'name' => 'required',
             'descripcion' => 'required',
             'ejecucion' => 'required',
-            'img' => 'required',
         ]);
 
         $existe = Service::where('name', $request -> name)
@@ -56,8 +55,9 @@ class ServiceController extends Controller
     }
 
     public function update(Request $request, string $id)
+    
     {
-        $service = Service::find($id);
+        $service = Service::where('id', $id)->first();
 
         if(!$service)
         {
@@ -66,23 +66,25 @@ class ServiceController extends Controller
         } 
         else 
         {
-            $service = Service::update([
-                'name'=> $request -> name,
-                'descripcion' => $request -> descripcion,
-                'ejecucion' => $request -> ejecucion,
-                'img' => $request -> img,
+            $request -> validate([
+                'name' => 'required',
+                'descripcion' => 'required',
+                'ejecucion' => 'required',
+                'img' => 'required',
             ]);
-
-            return response() ->json([
-                'message'=> 'El servicio se ha actualizado con exito'
-            ]);
+            
+            $service -> update($request->all());
+            return response()->json([
+                'message'=> 'Servicio actualizado con exito'
+            ],201);
+            
         }
     }
 
     public function destroy(string $id)
     {
         $service = Service::find($id);
-        $service -> detele();
+        $service -> delete();
 
         return response() ->json([
             'message' => 'Se ha eliminado el Servicio con Exito'

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
 import { NlrservicesService } from '../../../services/nlrservices.service';
@@ -26,6 +26,7 @@ import { Img } from '../../interfaces/files';
 })
 
 export class ProductsComponent implements OnInit {
+  @Output() productRegistered = new EventEmitter<void>();
 
   inforProduct = {
     name: '',
@@ -206,6 +207,7 @@ export class ProductsComponent implements OnInit {
             this.datosIMG = [];
             this.selectimg = '';
             this.visibleINPUT = true;
+            this.productRegistered.emit();
           }, 
           error: (err: any) => {
             this.loading = !this.loading;

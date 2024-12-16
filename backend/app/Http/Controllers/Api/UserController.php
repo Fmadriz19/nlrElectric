@@ -98,7 +98,18 @@ class UserController extends Controller
     /*     Actualizar datos de un usuario en especifico      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::where('id', $id)->first();
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'Usuario no encontrado'
+            ], 404);
+        } else {
+            $user->update($request->all());
+            return response()->json([
+                'message' => 'Usuario actualizado con exito'
+            ]);
+        }
     }
 
     /*     Eliminar un usuario      */

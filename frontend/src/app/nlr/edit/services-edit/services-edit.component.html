@@ -1,0 +1,112 @@
+
+<p-toast position="bottom-left" />
+<form class="w-full mx-auto" (ngSubmit)="registre()">
+    
+    <div class="space-y-4 text-sm">
+
+        <div class="lg:flex lg:flex-row gap-4 md:grid-row md:space-y-4">
+
+            <div class="basis-1/2 md:mt-4 max-w-72">
+                <div class="flex justify-center items-center relative">
+                    <input name="name"
+                        required [ngClass]="{'border-red-500': errores.name, 'border-green-600': inputName}" class="w-full text-sm text-gray-900 px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                        type="text" 
+                        [(ngModel)]="inforService.name"
+                        (blur)="focusName()">
+                        <span [ngClass]="{'text-red-500': errores.name, 'text-green-600': inputName}" class="text-sm text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
+                            Nombre
+                        </span>
+                </div>
+                
+                <p *ngIf="errores.name" class="text-sm ms-1 text-red-500 pt-2">{{this.errores.name}}</p>
+            </div>
+
+            <div class="basis-1/2 max-w-72">
+                <div class="flex justify-center items-center relative">
+
+                        <input name="ejecucion"
+                        required [ngClass]="{'border-red-500': errores.ejecucion, 'border-green-600': inputEjecucion}" class="w-full text-sm text-gray-900 px-4 py-3 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit"
+                        type="text" 
+                        [(ngModel)]="inforService.ejecucion" 
+                        (keypress)="validationEjecucion($event)" 
+                        (blur)="focusEjecucion()">
+                            <span [ngClass]="{'text-red-500': errores.ejecucion, 'text-green-600': inputEjecucion}" class="text-sm text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white peer-valid:text-xs peer-valid:-translate-y-5">
+                                Ejecución
+                            </span>
+                </div>
+                <p *ngIf="errores.ejecucion" class="text-sm ms-1 text-red-500 pt-2">{{this.errores.ejecucion}}</p>
+            </div>
+        </div>
+
+        <div class="">
+
+            <div class="flex justify-center items-center relative">
+
+                <textarea name="descripcion" 
+                (blur)="verificarLongitud()" 
+                [ngClass]="{'border-red-500': errores.descripcion, 'border-green-600': inputDescripcion}" type="text" 
+                [(ngModel)]="inforService.descripcion"
+                required class="w-full text-sm px-4 py-3 bg-gray-200 border text-gray-900 border-gray-200 rounded-lg focus:outline-none focus:border-sky-500 dark:focus:border-purple-400 peer bg-inherit " > </textarea>
+                
+                <span [ngClass]="{'text-red-500': errores.descripcion, 'peer-valid:text-xs peer-valid:-translate-y-5 text-green-600': inputDescripcion}" class="text-sm text-slate-500 text-opacity-80 absolute left-0 top-3 mx-2 px-2 transition duration-200 peer-focus:text-sky-500 dark:peer-focus:text-purple-700 pointer-events-none peer-focus:text-xs peer-focus:-translate-y-5 bg-white ">
+                    Descripción
+                </span>
+
+                
+            </div>
+            <p *ngIf="errores.descripcion" class="text-sm ms-1 text-red-500 pt-2">{{this.errores.descripcion}}</p>
+
+        </div>
+        
+        <div class="flex flex-row gap-4">
+            <div class="col-span-full max-w-xl">
+                <div class="grid grid-cols-4 gap-2">
+                    <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900">Imagen del Producto</label>
+                    <label for="name-phote" class="col-span-2 text-sm leading-6 text-sky-400 underline decoration-sky-500/35 dark:text-purple-400 dark:decoration-purple-500/35 transition duration-500 ease-in uppercase ">{{inforIMG.name}}</label>
+                    <label [ngClass]="{'opacity-60 cursor-not-allowed' : !loading}"  *ngIf="!visibleINPUT" for="file-upload" class="col-end-7 text-sm leading-6 relative cursor-pointer rounded-md bg-white font-semibold text-sky-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-sky-600 focus-within:ring-offset-2 hover:text-sky-500">
+                        <span>Cambiar imagen</span>
+                        <input [disabled]="!loading" (change)="uploadImage($event)" id="file-upload" name="img" type="file" class="sr-only" accept=".jpg, .png, .jpeg">
+                    </label>
+                </div>
+                <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                    <div *ngIf="visibleINPUT" class="text-center">
+                        <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
+                        </svg>
+                        <div class="mt-4 flex text-sm leading-6 text-gray-600">
+                            <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+                                <span>Upload a file</span>
+                                <input (change)="uploadImage($event)" id="file-upload" name="img" type="file" class="sr-only" accept=".jpg, .png, .jpeg">
+                            </label>
+                            <p class="pl-1">or drag and drop</p>
+                        </div>
+                        <p class="text-xs leading-5 text-gray-600">PNG, JPG, JPEG up to 10MB</p>
+                    </div>
+
+                    <div *ngIf="!visibleINPUT" class="bg-cover bg-center max-w-sm h-48 overflow-hidden rounded-lg shadow-xl">
+                        <img class="w-full h-full object-cover" [src]="selectimg" alt="">
+                    </div>
+                    
+                </div>
+                <p *ngIf="errores.img" class="text-sm ms-1 text-red-500 py-2">{{this.errores.img}}</p>
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="t-2 flex gap-4">
+            <button [disabled]="validado" (click)="registre()" [ngClass]="{'opacity-60 cursor-not-allowed' : validado}" type="submit" class="w-full flex justify-center dark:bg-purple-800 dark:hover:bg-purple-700 text-gray-100 p-3 rounded-lg tracking-wide font-semibold transition ease-in duration-500 bg-sky-600 hover:bg-sky-700">
+                <svg *ngIf="!loading" class="animate-spin w-5 h-5 mr-3 fill-[#ffffff]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z"></path>
+                </svg>
+                {{statusBtn}}
+            </button>
+
+        </div>
+        
+    </div>
+</form>
+
+

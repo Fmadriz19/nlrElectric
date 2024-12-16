@@ -38,7 +38,10 @@ export class LoginComponent {
   confirPasswordSVG: boolean = true;
   confirPassword: boolean = false;
   passwordPass: boolean = false;
-  loading: boolean = true;
+  loading: boolean = false;
+  inputEmail: boolean = false;
+  inputPassword: boolean = false;
+  validado: boolean = true;
 
   constructor(private message: MessageService, private services:NlrservicesService, private router: Router, private cookie: CookieService){
 
@@ -52,7 +55,8 @@ export class LoginComponent {
 
   login() {
     this.loading = !this.loading;
-
+    this.validado = !this.validado;
+    this.statusBtn = 'Cargando...';
     this.services.login(this.inforLogin as loginRequest).subscribe({
       next: (data: any) => {
         console.log(data);
@@ -66,10 +70,13 @@ export class LoginComponent {
           this.Error = err.error.errors;
           this.loading = !this.loading;
           this.statusBtn = 'Iniciar sesión';
+          this.validado = !this.validado;
+
         } else {
           this.errorCredenciales = err.error.message;
           console.log(this.errorCredenciales);
-          
+          this.validado = !this.validado;
+
           this.loading = !this.loading;
           this.statusBtn = 'Iniciar sesión';
           this.notificationError();
@@ -88,6 +95,53 @@ export class LoginComponent {
     console.log('se presiono el ojo');
     this.confirPasswordSVG = !this.confirPasswordSVG;
     this.confirPassword = !this.confirPassword;
+  }
+
+  focusEmail() {
+    const valor = this.inforLogin.email.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.(com|edu\.ve|net)$/;
+
+    if (valor === '') {
+        this.Error.email = 'El campo no puede quedar vacío, ingrese un valor válido.';
+        this.inputEmail = false;
+        this.validarCampos();
+        return;
+    } else if (!emailRegex.test(valor)) {
+        this.Error.email = 'El correo electrónico debe contener una dirección de correo como: @gmail.com, @hotmail.com, @ujap.edu.ve, etc.';
+        this.inputEmail = false;
+        this.validarCampos();
+        return;
+    } else {
+      
+      this.Error.email = '';
+      this.inputEmail = true;
+      this.validarCampos();
+  }
+}
+
+  focusPassword(){
+    const valor = this.inforLogin.password.trim();
+    if (valor === '') {
+      this.Error.password = 'El campo no puede quedar vacio, Ingrese un valor valido.' 
+      this.inputPassword = false;
+      this.validarCampos();       
+      return;
+    }
+    
+    else{
+      this.Error.password = ''    
+      this.inputPassword = true;
+      this.validarCampos();     
+    }
+  }
+
+  validarCampos(){
+    if ((this.inputEmail) && (this.inputPassword)){
+      this.validado = false;
+    } else {
+      this.statusBtn = 'Iniciar sesión';
+      this.validado = true;
+    }
   }
 
   /* Notificar algun error */

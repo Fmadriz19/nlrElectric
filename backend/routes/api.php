@@ -14,6 +14,7 @@ use App\Mail\recoverMailable;
 Route::get('/view', [UserController::class, 'index']);
 Route::post('/registre', [UserController::class, 'store']);
 Route::get('/search/{id}', [UserController::class,'show']);
+Route::put('/update/{id}', [UserController::class,'update']);
 Route::delete('/delete/{id}', [UserController::class,'destroy']);
 
 Route::post('/restaurarPass', [UserController::class,'restorePassword']);

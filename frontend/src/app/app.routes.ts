@@ -5,16 +5,15 @@ import { RecoverEmailComponent } from './nlr/recover/recover-email/recover-email
 import { RecoverCodeComponent } from './nlr/recover/recover-code/recover-code.component';
 import { RecoverPassComponent } from './nlr/recover/recover-pass/recover-pass.component';
 import { HomeComponent } from './nlr/home/home.component';
-import { ProductsComponent } from './nlr/registre/products/products.component';
-import { ProductsEditComponent } from './nlr/edit/products-edit/products-edit.component';
 import { adminGuard, loginGuard, noLogin, rolesGuard } from './guards/login.guard';
 import { UserListComponent } from './nlr/list/user-list/user-list.component';
 import { UsersEditComponent } from './nlr/edit/users-edit/users-edit.component';
-import { NewUserComponent } from './nlr/registre/new-user/new-user.component';
 import { StoreProductComponent } from './nlr/home/store-product/store-product.component';
 import { StoreServicesComponent } from './nlr/home/store-services/store-services.component';
 import { ViewproductsComponent } from './nlr/view/viewproducts/viewproducts.component';
 import { SearchProductsComponent } from './nlr/search-products/search-products.component';
+import { ContactanosComponent } from './nlr/home/contactanos/contactanos.component';
+import { AboutComponent } from './nlr/home/about/about.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, title: 'Home'},
@@ -23,13 +22,12 @@ export const routes: Routes = [
     { path: 'recovere', component: RecoverEmailComponent, title: 'Confirmar Email', canActivate: [noLogin]},
     { path: 'recoverc', component: RecoverCodeComponent, title: 'Codigo de Verificación', canActivate: [noLogin]},
     { path: 'recoverp', component: RecoverPassComponent, title: 'Cambiar contraseña', canActivate: [noLogin]},
-    { path: 'registre/products', component: ProductsComponent, title: 'Registro de Productos', canActivate: [loginGuard, rolesGuard]},
-    { path: 'registre/user', component: NewUserComponent, title: 'Registrar nuevo usuario', canActivate: [loginGuard, adminGuard]},
-    { path: 'edit/product', component: ProductsEditComponent, title: 'Editar Producto', canActivate: [loginGuard, rolesGuard]},
     { path: 'edit/user', component: UsersEditComponent, title: 'Editar Usuario', canActivate: [loginGuard]},
     { path: 'list', component: UserListComponent, title: 'Lista de Usuarios', canActivate: [loginGuard, adminGuard]},
     { path: 'products', component: StoreProductComponent, title: 'Tienda de Productos'},
     { path: 'services', component: StoreServicesComponent, title: 'Tienda de Servicios'},
     { path: 'products/view', component: ViewproductsComponent, title: 'Vista del Producto'},
+    { path: 'contactanos', component: ContactanosComponent, title: 'Contactanos'},
+    { path: 'sobre_nosotros', component: AboutComponent, title: 'Sobre Nosotros'},
     { path: 'search/product', component: SearchProductsComponent, title: 'Explorar Productos', canActivate: [loginGuard, adminGuard]},
 ]

@@ -7,12 +7,19 @@ import { UsersComponent } from './nlr/registre/users/users.component';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { ProductsimgService } from './services/productsimg.service';
 import { ScrapingService } from './services/scraping.service';
+import { IStaticMethods } from 'flyonui/flyonui';
+
+declare global {
+  interface Window {
+    HSStaticMethods: IStaticMethods;
+  }
+}
 
 @Component({
   selector: 'app-root',
   standalone: true,
   providers: [NgModule, NlrservicesService, CookieService, ProductsimgService],
-  imports: [CommonModule, NavbarComponent, UsersComponent, RouterModule],
+  imports: [CommonModule, NavbarComponent, RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -34,6 +41,10 @@ export class AppComponent implements OnInit, OnDestroy {
         } else {
           // Si sales de la ruta 'list', muestra el navbar
           this.showNavbar = true;
+          /* setTimeout(() => {
+            // @ts-ignore
+            HSStaticMethods.autoInit();
+          }, 100); */
         }
       }
     });
