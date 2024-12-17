@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ServiceController;
+use App\Http\Controllers\Api\FacturaController;
 use App\Mail\recoverMailable;
 
 /* --- Rutas Usuarios --- */
@@ -39,12 +40,12 @@ Route::delete('/delete/service/{id}', [ServiceController::class,'destroy']);
 
 /* --- Rutas Factura --- */
 
-Route::get('/view/factura', [ServiceController::class,'index']);
-Route::post('/registre/factura', [ServiceController::class,'store']);
-Route::get('/show/factura/{id}', [ServiceController::class,'show']);
-Route::put('/update/factura/{id}', [ServiceController::class,'update']);
-Route::put('/update/factura/{id}', [ServiceController::class,'update']);
-Route::delete('/delete/factura/{id}', [ServiceController::class,'destroy']);
+Route::get('/view/factura', [FacturaController::class,'index']);
+Route::post('/registre/factura', [FacturaController::class,'store']);
+Route::get('/show/factura/{id}', [FacturaController::class,'show']);
+Route::put('/update/factura/{id}', [FacturaController::class,'update']);
+Route::put('/update/factura/{id}', [FacturaController::class,'update']);
+Route::delete('/delete/factura/{id}', [FacturaController::class,'destroy']);
 
 /* ---- Tasa del bcv ---- */
 

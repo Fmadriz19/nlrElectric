@@ -94,17 +94,22 @@
                 aria-haspopup="true">
                 <span class="absolute -inset-1.5"></span>
                 <span class="sr-only">Open user menu</span>
-                
-              <div class="relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-                <span class="font-medium text-gray-600 dark:text-gray-300">{{personal_perfil}}</span>
-              </div>
 
+              <img *ngIf="personalData && personalData !== 'null'" class="w-10 h-10 rounded-full"
+                    [src]="personalData"
+                    alt="">
+
+                <!-- Mostrar div si no hay imagen -->
+                <div *ngIf="!personalData || personalData === 'null'" 
+                    class="relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                    <span class="font-medium text-gray-600 dark:text-gray-300">{{personal_perfil }}</span>
+                </div>
               </button>
 
               <!-- --- HACERLO RESPONSIVE --- -->
               <div *ngIf="!avatarMenu" 
               class="flex flex-col align-items-center group-hover:opacity-100 transition-opacity bg-gray-100 px-2 text-sm text-gray-800 rounded-md absolute left-1/5 -translate-x-1/2 translate-y-1/4 opacity-0 mx-auto p-2 border border-gray-800" >
-                  <span class=""> {{this.user.name}} </span>
+                <p class="font-semibold">Hola  <span class="font-thin"> {{this.user.name}} </span> </p>
                   <span class=""> {{this.user.email}} </span>
               </div>
 
@@ -116,7 +121,6 @@
               role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
               <!-- Active: "bg-gray-100", Not Active: "" -->
               <a (click)="visibleMenuAvatar()" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Perfil</a>
-              <a (click)="visibleMenuAvatar()" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
               <a (click)="cerrarSession()" class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:text-slate-200 hover:bg-sky-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Cerrar Sesión</a>
             </div>
           </div>

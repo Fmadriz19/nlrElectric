@@ -323,8 +323,8 @@
                                     </div>
 
                                     <div class="mx-5">
-                                        <h4 class="text-2xl font-semibold text-gray-700">200,521</h4>
-                                        <div class="text-gray-500">Total Orders</div>
+                                        <h4 class="text-2xl font-semibold text-gray-700"> {{total_facturas}} </h4>
+                                        <div class="text-gray-500">Total de compras</div>
                                     </div>
                                 </div>
                             </div>
@@ -377,6 +377,85 @@
                             </div>
                         </form>
 
+                    <!--  Notificacion por falta de producto  -->
+
+                    <div *ngIf="visibleNotification" class="flex w-[870px] p-2.5 mb-8 text-sm text-white bg-gray-100 rounded-lg shadow-md">
+                        <p-panel header="Productos con stock bajos" [toggleable]="true" [collapsed]="true">
+                                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                                Nombre</th>
+                                            <th
+                                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                                Stock</th>
+                                            <th
+                                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                                Estado</th>
+                                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        <tr *ngFor="let product of lowStockProducts">
+                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                <div class="flex items-center">
+                                                    <div class="flex-shrink-0 w-10 h-10">
+                                                        <img class="w-10 h-10 rounded-full"
+                                                            [src]="product.img"
+                                                            alt="">
+                                                    </div>
+            
+                                                    <div class="ml-4 min-w-[287px]">
+                                                        <div class="text-sm font-medium leading-5 text-gray-900">
+                                                            {{product.name}}</div>
+                                                        </div>
+                                                </div>
+                                            </td>
+            
+                                            <td
+                                                class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
+                                                <span
+                                                    [ngClass]="{'text-red-800 bg-green-100 rounded-full' : product.stock == 0}"
+                                                    class="inline-flex px-2 text-xs font-semibold leading-5">
+                                                    {{product.stock}}
+                                                </span>
+                                            </td>
+            
+                                            <td
+                                                class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
+                                                <span
+                                                    [ngClass]="product.estado.toLowerCase() == 'disponible' ? 'text-green-800 bg-green-100 rounded-full' : 'text-red-800 bg-red-100 rounded-full'"
+                                                    class="inline-flex px-2 text-xs font-semibold leading-5">
+                                                    {{product.estado}}
+                                                </span>
+                                            </td>                         
+            
+                                            <td class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
+                                                <div>
+                                                    <p-splitButton 
+                                                        label="Actualizar" 
+                                                        [model]="items" 
+                                                        (onClick)="update(product.id)" 
+                                                        (onDropdownClick)="onDropdownClick(product.id)" 
+                                                        raised 
+                                                        text 
+                                                        severity="info"
+                                                        size="small"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                   
+                            </table>
+                            
+                        </p-panel>
+                    </div>
+
+
                     <!-- Tabla de Usuarios -->
                     <div *ngIf="visibleUser" class="flex flex-col mt-8">
                         <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -407,9 +486,17 @@
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 <div class="flex items-center">
                                                     <div class="flex-shrink-0 w-10 h-10">
-                                                        <img class="w-10 h-10 rounded-full"
-                                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
+                                                       <!-- Mostrar imagen si existe -->
+                                                        <img *ngIf="user.image && user.image !== 'null'" class="w-10 h-10 rounded-full"
+                                                            [src]="user.image"
                                                             alt="">
+
+                                                        <!-- Mostrar div si no hay imagen -->
+                                                        <div *ngIf="!user.image || user.image === 'null'" 
+                                                            class="relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                                                            <span class="font-medium text-gray-600 dark:text-gray-300">{{ user.name | slice:0:2 }}</span>
+                                                        </div>
+
                                                     </div>
 
                                                     <div class="ml-4">
@@ -495,7 +582,7 @@
                                             <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm"
                                                 aria-label="Pagination">
                                                 <a (click)="nextPag(pag_actual - 1)"
-                                                    class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                                    class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 cursor-pointer"
                                                     [class.disabled]="pag_actual === 1">
                                                     <span class="sr-only">Previous</span>
                                                     <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
@@ -516,7 +603,7 @@
                                                 </ng-container>
 
                                                 <a (click)="nextPag(pag_actual + 1)"
-                                                    class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                                    class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 cursor-pointer"
                                                     [class.disabled]="pag_actual === totalPag()">
                                                     <span class="sr-only">Next</span>
                                                     <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
@@ -574,8 +661,8 @@
                                     </thead>
 
                                     <tbody class="bg-white">
-                                        @for (product of getProductsPag(); track $index) {
-                                        <tr>
+                                        <!-- @for (product of getProductsPag(); track $index) { -->
+                                        <tr *ngFor="let product of getProductsPag() | search: searchText ">
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 <div class="flex items-center">
                                                     <div class="flex-shrink-0 w-10 h-10">
@@ -631,7 +718,7 @@
                                             <td
                                                 class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
                                                 <span
-                                                    [ngClass]="{'text-green-800 bg-green-100 rounded-full' : product.price === 'admin'}"
+                                                    [ngClass]="{'text-red-800 bg-green-100 rounded-full' : product.stock == '0'}"
                                                     class="inline-flex px-2 text-xs font-semibold leading-5">
                                                     {{product.stock}}
                                                 </span>
@@ -700,7 +787,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        }
+                                        
 
                                     </tbody>
 
@@ -801,8 +888,8 @@
                                     </thead>
 
                                     <tbody class="bg-white">
-                                        @for (service of getServicePag(); track $index) {
-                                        <tr>
+                                        <!-- @for (service of getServicePag(); track $index) { -->
+                                        <tr *ngFor="let service of getServicePag() | search: searchText ">
                                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                 <div class="flex items-center">
                                                     <div class="flex-shrink-0 w-10 h-10">
@@ -857,7 +944,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        }
+                                        
 
                                     </tbody>
 

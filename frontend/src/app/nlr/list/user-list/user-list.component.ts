@@ -24,11 +24,12 @@ import { ServicesEditComponent } from '../../edit/services-edit/services-edit.co
 import { EditsService } from '../../../services/edits.service';
 import { FacturaComponent } from '../../registre/factura/factura.component';
 import { SearchPipe } from './search.pipe';
+import { PanelModule } from 'primeng/panel';
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [TableModule, NgClass, NgIf, NgFor, SkeletonModule, TabViewModule, SplitButtonModule, CommonModule, DialogModule, FormsModule, ConfirmDialogModule, ToastModule, NewUserComponent, ProductsComponent, ServiciosComponent, ServicesEditComponent, FacturaComponent, SearchPipe ],
+  imports: [TableModule, NgClass, NgIf, NgFor, SkeletonModule, TabViewModule, SplitButtonModule, CommonModule, DialogModule, FormsModule, ConfirmDialogModule, ToastModule, NewUserComponent, ProductsComponent, ServiciosComponent, ServicesEditComponent, FacturaComponent, SearchPipe, PanelModule ],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss',
   providers: [MessageService, ConfirmationService],
@@ -66,7 +67,8 @@ export class UserListComponent implements OnInit {
   numIMG: number = 0;
   titulo: string = 'Usuarios';
   searchText: string = '';
-
+  lowStockProducts: ProductsGeneral[] = [];
+  total_facturas: number = 0;
   inforUser = {
     name: '',
     email: '',
@@ -126,14 +128,14 @@ export class UserListComponent implements OnInit {
   darkMode: boolean = false;
   sessionAct: boolean = false;
   permisos: boolean = false;
-  visibleUser: boolean = false; //cambiar a true
+  visibleUser: boolean = true; //cambiar a true
   visibleProduct: boolean = false;
   visibleService: boolean = false;
   visibleForms: boolean = false;
   visibleFormUser: boolean = false;
   visibleFormProduct: boolean = false;
   visibleFormServicio: boolean = false;
-  visibleFormFactura: boolean = true;
+  visibleFormFactura: boolean = false;
   open: boolean = false;
   isDropdownVisible: boolean = false;
   visible: boolean = false;
@@ -144,8 +146,9 @@ export class UserListComponent implements OnInit {
   loading: boolean = true;
   peer_valid: boolean = false;
   visibleINPUT: boolean = true;
-  visiblePaneles: boolean = false; //cambiar a true
-  barra_search: boolean = false;
+  visiblePaneles: boolean = true; //cambiar a true
+  barra_search: boolean = true;
+  visibleNotification: boolean = false; //cambiar a false
   
   // Antiguo dashboard
   usuarios: Users[] = [];
@@ -210,6 +213,7 @@ export class UserListComponent implements OnInit {
     this.getProducts();
     this.getUsers();
     this.getServices();
+    this.getFacturas();
   }
 
   /* ---  Funcionalidades global del dashboard  --- */
@@ -365,11 +369,30 @@ export class UserListComponent implements OnInit {
       next: (res) => {
         
         this.skeletonProduct = !this.skeletonProduct;
-        // Crear un nuevo array con la propiedad showFullDescription
-        this.productsGeneral = res.map((product: ProductsGeneral) => ({
-          ...product, // Copia todas las propiedades del producto original
-          showFullDescription: false // Agrega la nueva propiedad
-        }));
+
+        this.productsGeneral = res.map((product: ProductsGeneral) => {
+          // Verificar si el producto tiene stock bajo
+          const isInLowStockProducts = this.lowStockProducts.some(
+            (p) => p.id === product.id
+          );
+        
+          // Si el producto tiene stock bajo y no está en el array de bajo stock, agregarlo
+          if (product.stock <= 5 && !isInLowStockProducts) {
+            this.lowStockProducts.push(product);
+            this.visibleNotification = true;
+          }
+        
+          return {
+            ...product, 
+            showFullDescription: false 
+          };
+        });
+        
+        this.lowStockProducts = this.lowStockProducts.filter((lowStockProduct) => {
+          return res.some((product: ProductsGeneral) => product.id === lowStockProduct.id && product.stock <= 5);
+        });
+
+        this.visibleNotification = this.lowStockProducts.length > 0;
 
         this.total_products = this.productsGeneral.length;
 
@@ -589,7 +612,7 @@ export class UserListComponent implements OnInit {
   
   // Todos los sevicios
   getServices(){
-    this.nlrservice.indexService(this.serviciosGeneral as unknown as ServiciosGeneral).subscribe({
+    this.nlrservice.indexService().subscribe({
       next: (res: any) => {
         this.skeleton = !this.skeleton;
 
@@ -639,8 +662,10 @@ export class UserListComponent implements OnInit {
   /* ---  Apartado de lista de Facturas  --- */
   
   getFacturas(){
+    this.getProducts();
     this.nlrservice.indexFacturas().subscribe({
       next: (res: any) => {
+        this.total_facturas = res.length;
         console.log(res);
       },
       error: (err: any) => {
@@ -669,6 +694,7 @@ export class UserListComponent implements OnInit {
     this.visibleFormFactura = false;
     this.pag_actual = 1;
     this.visiblePaneles = true;
+    this.barra_search = true;
     this.titulo = 'Usuarios';
   }
   
@@ -682,6 +708,7 @@ export class UserListComponent implements OnInit {
     this.visibleFormFactura = false;
     this.pag_actual = 1;
     this.visiblePaneles = false;
+    this.barra_search = true;
 
     this.titulo = 'Productos';
   }
@@ -695,6 +722,7 @@ export class UserListComponent implements OnInit {
     this.visibleFormServicio = false;
     this.visibleFormFactura = false;
     this.visiblePaneles = false;
+    this.barra_search = true;
 
     this.pag_actual = 1;
 
@@ -712,6 +740,7 @@ export class UserListComponent implements OnInit {
     this.visibleFormFactura = false;
     this.visiblePaneles = false;
     this.pag_actual = 1;
+    this.barra_search = false;
 
     this.titulo = 'Crear Usuario';
 
@@ -727,6 +756,7 @@ export class UserListComponent implements OnInit {
     this.visibleFormFactura = false;
     this.visiblePaneles = false;
     this.pag_actual = 1;
+    this.barra_search = false;
 
     this.titulo = 'Crear Producto';
   }
@@ -741,6 +771,7 @@ export class UserListComponent implements OnInit {
     this.visibleFormFactura = false;
     this.pag_actual = 1;
     this.visiblePaneles = false;
+    this.barra_search = false;
 
     this.titulo = 'Crear Servicio';
   }
@@ -755,6 +786,7 @@ export class UserListComponent implements OnInit {
     this.visibleFormFactura = true;
     this.pag_actual = 1;
     this.visiblePaneles = false;
+    this.barra_search = false;
 
     this.titulo = 'Crear Factura';
   }

@@ -36,34 +36,33 @@
         </div>
 
       <!--  Cuadrícula de productos  -->
-        <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 2xl:grid-cols-6">
 
-          @for (product of productsPag(); track $index){
-            <div class="card sm:max-w-sm">
-              <figure>
-                <img [src]="product.image" alt="" class="h-full w-full object-cover object-center" />
-              </figure>
-              <div class="card-body">
-                
-                <h5 class="card-title text-xl mb-2.5"> {{ product.title | slice:0:30 }}... </h5>
-
-                <!-- <ng-container>
-                  <div class="flex align-items-center">
-                    <span>{{ product.title }}</span>
+        <div class="flex flex-wrap pt-20 px-6 gap-4"> 
+     
+          <div *ngFor="let list of productsPag()" class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <a>
+                  <img class="p-8 rounded-t-lg" [src]="list.image" alt="product image" />
+              </a>
+              <div class="px-5 pb-5">
+                  <a>
+                      <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"> {{list.title | slice:0:30}} </h5>
+                  </a>
+                  <div class="items-center mt-2.5 mb-5">
+                      <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3"> {{list.type}} </span>
                   </div>
-                </ng-container> -->
 
-                <p class="mb-4"> {{product.type}} </p>
-                <p class="mb-4"> {{product.price}} </p>
-                <div class="card-actions">
-                  <button (click)="abrir(product.url)" class="btn btn-primary">Ver Producto</button>
-                  <!-- <button class="btn btn-secondary btn-soft">Add to cart</button> -->
-                </div>
+                  <a>
+                      <h2 class="text-gray-600 font-semibold text-lg mb-2"> {{list.price}} </h2>
+                  </a>
+
+                  <div class="flex items-center justify-between">
+                      <a (click)="abrir(list.url)" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer">Ver Producto</a>                            
+                      
+                  </div>
               </div>
-            </div>
-          }
-          <!-- <p class="text-center text-gray-500 mt-6">No se encontraron productos que coincidan con tu búsqueda.</p> -->
-        </div>
+          </div>
+  
+      </div>
 
       <!--  Skeleton  -->
         <div *ngIf="loading" class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 2xl:grid-cols-6 transition-all ease-in duration-300">

@@ -73,7 +73,7 @@ export class NlrservicesService {
   }
 
   // Extraer todos los servicios
-  indexService(credentials: ServiciosGeneral): Observable<any>{
+  indexService(): Observable<any>{
     return this.http.get(`${this.url}/view/service`);
   }
 

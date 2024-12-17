@@ -169,11 +169,11 @@ export interface Producto {
 }
   
 export interface Factura_Producto {
-    nombre: string;
+    name_user: string;
     email: string;
     empresa: string;
     verificar: string;
-    usuario_id: number;
+    id_user: number;
     productos: Producto[];
     informacion_servicio: Servicio_Producto[];
     estado: string;
@@ -186,4 +186,20 @@ export interface Servicio_Producto {
     informe: string;
     fecha_servicio: string;
     horas_servicio: string;
+}
+
+export interface colaboradores {
+    url: string;
+    name: string;
+    rol: string;
+    ig: string;
+    gm: string;
+}
+
+export interface Servicios_view {
+    id: number;
+    name: string;
+    descripcion: string;
+    ejecucion: string;
+    img: string;
 }

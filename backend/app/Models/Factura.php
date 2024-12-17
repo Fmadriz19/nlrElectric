@@ -17,26 +17,18 @@ class Factura extends Model
         'name_user',
         'empresa',
         'email',
-        'name_compras',
-        'model',
-        'price',
-        'cantidad',
-        'img',
-        'marca',
-        'descripcion',
-        'tipo',
-        'amperaje',
-        'voltaje',
-        'proveedor',
-        'ejecucion',
-        'informe',
         'code_sku',
-        'envio',
-        'direccion',
         'estado',
-        'fecha_realizar',
         'fecha_compra',
         'iva',
-        'total'
+        'total', 
+        'productos',
+        'informacion_servicio',
+    ];
+
+    // Para que Laravel reconozca el campo `productos` como un array al recuperarlo
+    protected $casts = [
+        'productos' => 'array',
+        'informacion_servicio' => 'array',
     ];
 }

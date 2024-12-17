@@ -107,9 +107,9 @@ export class FacturaComponent implements OnInit{
 
   productos_registrar: Factura_Producto = {
     verificar: '',
-    nombre: '',
+    name_user: '',
     email: '',
-    usuario_id: 0,
+    id_user: 0,
     empresa: 'personal',
     productos: [] as any[],
 
@@ -145,7 +145,7 @@ export class FacturaComponent implements OnInit{
   inputName: boolean = false;
   inputEjecucion: boolean = false;
   inputDescripcion: boolean = false;
-  validado: boolean = false;
+  validado: boolean = true;
 
   constructor(private cookie: CookieService, private servicenlr: NlrservicesService, private router: Router, private message: MessageService, private tasa: ScrapingService) {
     this.statusBtn = 'Registrar';
@@ -185,13 +185,14 @@ export class FacturaComponent implements OnInit{
   }
 
   validarCampos(){
-    if(!(this.inforService.name.trim() === '') && !(this.inforService.ejecucion.trim() === '') && !(this.inforService.descripcion.trim() === '')){
+
+    if((this.productos_registrar.verificar !== "") && (this.productos_registrar.name_user !== "") && (this.productos_registrar.email !== "") && (this.productos_registrar.id_user !== 0) && (this.productos_registrar.empresa !== "") && (this.productos_registrar.estado !== "") && (this.productos_registrar.fecha_compra !== "") && (this.productos_registrar.iva !== "") && (this.productos_registrar.total !== "")){
       this.validado = false;
       console.log('valido');
       
     } else {
       
-      this.validado = true
+      this.validado = true;
       console.log('no valido');
     }
   }
@@ -274,10 +275,13 @@ export class FacturaComponent implements OnInit{
     if (evento === 'SO') {
       this.campos_factura = false;
       this.opcion_factura = event.value.code;
+      this.productos_registrar.verificar = event.value.name;
       return ;
     }
     this.campos_factura = true;
     this.opcion_factura = event.value.code;
+    this.productos_registrar.verificar = event.value.name;
+
   }
 
   // Extraer todos los usuarios para el autocomplete
@@ -309,12 +313,8 @@ export class FacturaComponent implements OnInit{
     const evento = $event.value;
     this.select_user = this.inforUser.find(user => user.user === evento);
 
-    this.factura_General.name_user = this.select_user.name;
-    this.factura_General.id_user = this.select_user.id;
-    this.factura_General.email = this.select_user.email;
-
-    this.productos_registrar.nombre = this.select_user.name;
-    this.productos_registrar.usuario_id = this.select_user.id;
+    this.productos_registrar.name_user = this.select_user.name;
+    this.productos_registrar.id_user = this.select_user.id;
     this.productos_registrar.email = this.select_user.email;
 
   }
@@ -325,6 +325,7 @@ export class FacturaComponent implements OnInit{
 
   onChangeFacturaEstado(event: any){
     this.productos_registrar.estado = event.value.name;
+    this.validarCampos();
   }
 
   // extraer todos los productos
@@ -351,6 +352,7 @@ export class FacturaComponent implements OnInit{
   // Al seleccionar un producto
   onProductSelected(product: any, rowIndex: number) {
     const row = this.rows[rowIndex];
+    row.id = product.value.id;
     row.product = product.value.name;
     row.price = product.value.price;
     row.maxQuantity = product.value.stock; 
@@ -358,7 +360,7 @@ export class FacturaComponent implements OnInit{
 
   // Añadir fila nueva
   addRow() {
-    this.rows.push({ product: null, price: 0, quantity: '', total: 0, maxQuantity: 0 });
+    this.rows.push({ id: 0, product: null, price: 0, quantity: '', total: 0, maxQuantity: 0 });
   }
 
   // Eliminar fila
@@ -389,6 +391,8 @@ export class FacturaComponent implements OnInit{
     this.total_sin_iva_VES = this.total_sin_iva_dolares.toString();
     this.total_iva_VES = this.total_iva_dolares.toString();
 
+    this.productos_registrar.iva = this.total_iva_dolares.toString();
+    this.productos_registrar.total = this.precioTotalFactura.toString();
     this.conversionTasa();
   }
 
@@ -433,23 +437,43 @@ export class FacturaComponent implements OnInit{
   // registrar factura
   registre(){
 
-    if(this.opcion_factura === 'SO'){
-      this.productos_registrar.verificar = 'Servicio';
-
-    } else if(this.opcion_factura === 'PO') {
-      this.productos_registrar.verificar = 'Producto';
       this.productos_registrar.productos = this.rows; 
-      this.productos_registrar.iva = this.total_iva_dolares.toString();
-      this.productos_registrar.total = this.precioTotalFactura.toString();
-      console.log(this.productos_registrar);
       
-      /* this.servicenlr.registreProduct(this.factura_General).subscribe({
-        next: (data: any) => {},
-        error: (err: any) => {}
-      }) */
-    } else {
-      this.factura_General.tipo = 'Propia';
-    }
+      this.servicenlr.registreFactura(this.productos_registrar as unknown as Factura_Producto).subscribe({
+        next: (data: any) => {
+          this.servicioRegistered.emit();
+          this.message.add({ severity: 'success', summary: 'Registro Exitoso', detail: 'El registro se ha realizado con éxito' });
+          this.productos_registrar = {
+            verificar: '',
+            name_user: '',
+            email: '',
+            id_user: 0,
+            empresa: 'personal',
+            productos: [] as any[],
+        
+            informacion_servicio: [] as any[], // puede ir incluido en un array fecha_servicio, informe y ejecucion
+            
+            estado: '',
+            fecha_compra: '',
+            iva: '',
+            total: '',
+          };
+          this.rows = [];
+          this.total_sin_iva_dolares = 0;
+          this.total_iva_dolares = 0;
+          this.precioTotalFactura = 0;
+          this.total_sin_iva_VES = '';
+          this.total_iva_VES = '';
+          this.pricebcv = '';
+          this.validado = true;
+          this.getProducts();
+
+        },
+        error: (err: any) => {
+          console.log(err.error.message);
+        }
+      })
+
   }
 
   error(){

@@ -234,7 +234,7 @@ export class ServiciosComponent implements OnInit{
         this.inforService.img = res;
 
         
-        this.servicenlr.registreService(this.inforService as ServiciosGeneral).subscribe({
+        this.servicenlr.registreService(this.inforService as unknown as ServiciosGeneral).subscribe({
           next: (res: any) => {
             this.loading = !this.loading;
             this.validado =!this.validado;
@@ -281,6 +281,7 @@ export class ServiciosComponent implements OnInit{
   
 
   }
+
 
   error(){
     this.message.add({ severity: 'warn', summary: 'Error de Solicitud', detail: 'Verificar que todos los campos cumpla lo requerido' });

@@ -25,6 +25,8 @@ export class NavbarComponent implements OnInit {
     email: ''
   }
 
+  personalData: string | null = null;
+
   cartData: any [] = [];
 
   notificaciones_cart: number = 0;
@@ -59,6 +61,7 @@ export class NavbarComponent implements OnInit {
     this.cartSubscription = this.carrito.getCartObservable().subscribe(() => {
       this.updateNotificaciones();
     });
+    
     const theme = localStorage.getItem('theme');
     if (theme === 'dark'){
       document.documentElement.classList.add('dark');
@@ -146,6 +149,7 @@ export class NavbarComponent implements OnInit {
         this.personal_perfil = res.user.slice(0, 2);
         this.user.name = res.name;
         this.user.email = res.email;
+        this.personalData = res.image;
       },
       error: (err: any) => {
         console.log(err.error.message);
